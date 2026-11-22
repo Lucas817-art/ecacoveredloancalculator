@@ -138,6 +138,10 @@ body{
 .rate-tbl>div{background:#fff;padding:4px 6px;font-size:10px;color:#3f4d60;text-align:center;font-variant-numeric:tabular-nums}
 .rate-tbl .rt-th{font-weight:600;color:#6b7b8f;background:#f6f9fc}
 .rate-tbl .rt-td:first-child{text-align:left;color:#5a6a7d}
+.rate-tbl .rt-td[data-rate]{cursor:pointer;transition:background .15s,color .15s}
+.rate-tbl .rt-td[data-rate]:hover{background:#eef4fb;color:#1f6feb}
+.rate-tbl .rt-td[data-rate].active{background:#1f6feb;color:#fff;font-weight:600}
+.prem-hint{margin-top:5px;font-size:11px;color:#1f6feb;font-variant-numeric:tabular-nums}
 .inp input[type=date]{text-align:left;padding-right:8px;font-size:11.5px}
 .switch{width:42px;height:22px;border-radius:12px;background:#dbe4ee;position:relative;cursor:pointer;transition:.18s;flex:0 0 auto}
 .switch::after{content:"";position:absolute;width:16px;height:16px;border-radius:50%;background:#fff;top:3px;left:3px;transition:.18s;box-shadow:0 1px 3px rgba(0,0,0,.22)}
@@ -183,6 +187,7 @@ body{
 .kpi .kv{font-size:19px;font-weight:650;letter-spacing:-.3px;color:#10263d;margin-top:2px;font-variant-numeric:tabular-nums;white-space:nowrap}
 .kpi .kv .cur{font-size:10.5px;color:#8fa0b3;font-weight:500;margin-right:2px;letter-spacing:0}
 .kpi .ks{font-size:10px;color:#8b99aa;margin-top:3px;line-height:1.3}
+.kpi .ks.wal-formula{font-size:9px;color:#a7b3c2;margin-top:2px;line-height:1.35}
 
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:14px 16px 12px;min-width:0}
 .card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px;flex-wrap:wrap}
@@ -497,14 +502,23 @@ footer{max-width:1560px;margin:0 auto;padding:0 24px 26px;font-size:10px;color:#
         <div class="rt-th" data-i18n="ccB"></div>
         <div class="rt-th" data-i18n="ccC"></div>
         <div class="rt-td" data-i18n="tenor3"></div>
-        <div class="rt-td">1.00%</div>
-        <div class="rt-td">1.50%</div>
-        <div class="rt-td">2.50%</div>
+        <div class="rt-td" data-tenor="3" data-cls="A" data-rate="1.00">1.00%</div>
+        <div class="rt-td" data-tenor="3" data-cls="B" data-rate="1.50">1.50%</div>
+        <div class="rt-td" data-tenor="3" data-cls="C" data-rate="2.50">2.50%</div>
         <div class="rt-td" data-i18n="tenor10"></div>
-        <div class="rt-td">2.15%</div>
-        <div class="rt-td">2.86%</div>
-        <div class="rt-td">5.36%</div>
+        <div class="rt-td" data-tenor="10" data-cls="A" data-rate="2.15">2.15%</div>
+        <div class="rt-td" data-tenor="10" data-cls="B" data-rate="2.86">2.86%</div>
+        <div class="rt-td" data-tenor="10" data-cls="C" data-rate="5.36">5.36%</div>
       </div>
+      <div class="row" style="display:flex;gap:8px;align-items:center;margin-top:5px">
+        <label class="fl" for="inClass" data-i18n="fClass" style="flex:0 0 auto"></label>
+        <div class="inp" style="flex:0 0 120px"><select id="inClass">
+          <option value="A" data-i18n="classA"></option>
+          <option value="B" data-i18n="classB"></option>
+          <option value="C" selected data-i18n="classC"></option>
+        </select></div>
+      </div>
+      <div class="prem-hint" id="premApplyHint"></div>
     </div>
     <div class="field" id="fieldPremBasis">
       <label class="fl" for="inPremBasis" data-i18n="fPremBasis"></label>
@@ -589,6 +603,7 @@ footer{max-width:1560px;margin:0 auto;padding:0 24px 26px;font-size:10px;color:#
         <div class="kl" data-i18n="kWAL"></div>
         <div class="kv" id="kWAL">—</div>
         <div class="ks" id="kWALS"></div>
+        <div class="ks wal-formula" id="kWALF"></div>
       </div>
       <div class="kpi" id="kpiEq">
         <div class="kl" data-i18n="kEquity3"></div>
@@ -758,6 +773,11 @@ var DICT = {
   ccC: ['国别 C 类', 'Country class C', 'Pays cat. C', 'País classe C', 'País clase C', 'Страна класс C', 'الدولة الفئة ج'],
   tenor3: ['3 年', '3 yrs', '3 ans', '3 anos', '3 años', '3 года', '3 سنوات'],
   tenor10: ['10 年', '10 yrs', '10 ans', '10 anos', '10 años', '10 лет', '10 سنوات'],
+  fClass: ['国别类别', 'Country class', 'Cat. pays', 'Classe país', 'Clase país', 'Класс страны', 'فئة الدولة'],
+  classA: ['A 类', 'Class A', 'Cat. A', 'Classe A', 'Clase A', 'Класс A', 'الفئة أ'],
+  classB: ['B 类', 'Class B', 'Cat. B', 'Classe B', 'Clase B', 'Класс B', 'الفئة ب'],
+  classC: ['C 类', 'Class C', 'Cat. C', 'Classe C', 'Clase C', 'Класс C', 'الفئة ج'],
+  premApply: ['适用 {T} · {K} · {R}%', 'Applies {T} · {K} · {R}%', 'Applicable {T} · {K} · {R}%', 'Aplica {T} · {K} · {R}%', 'Aplica {T} · {K} · {R}%', 'Примен. {T} · {K} · {R}%', 'ينطبق {T} · {K} · {R}%'],
   dPremFin: ['按比例将保费计入融资总额（最高 85%），余额由借款人放款前自付。', 'The financed share of the premium (max 85%) is added to the facility; the balance is paid by the borrower before drawdown.', 'La part financée de la prime (max 85 %) est ajoutée à la facilité ; le solde est réglé avant le tirage.'],
   derivedLoan: ['贷款本金', 'Loan principal', 'Principal du prêt', 'Principal do empréstimo', 'Principal del préstamo', 'Тело кредита', 'مبلغ القرض'],
   derivedFacility: ['融资总额', 'Facility amount', 'Montant de la facilité', 'Valor da facilidade', 'Monto de la facilidad', 'Сумма финансирования', 'إجمالي التسهيل'],
@@ -769,6 +789,7 @@ var DICT = {
   kPI: ['本息合计', 'Total principal + interest', 'Total principal + intérêts', 'Total principal + juros', 'Total principal + intereses', 'Всего долг + проценты', 'إجمالي الأصل والفائدة'],
   kPRate: ['P 基础费率', 'Premium rate (P basis)', 'Taux de prime (base P)', 'Taxa (base P)', 'Tasa (base P)', 'Ставка (база P)', 'المعدل على أساس الأصل'],
   kWAL: ['加权平均期限', 'Weighted average life', 'Durée moyenne pondérée', 'Prazo médio ponderado', 'Vida media ponderada', 'Средневзвешенный срок', 'متوسط العمر المرجح'],
+  walFormula: ['WAL = Σ(每期本金 × 占用天数) ÷ 本金总额 ÷ 年天数；天数自放款日算至还款日，年天数按计息基数（360/365）', 'WAL = Σ(principal repaid × days outstanding) ÷ total principal ÷ year basis; days from drawdown date to repayment date', 'WAL = Σ(principal remboursé × jours) ÷ principal total ÷ base annuelle ; jours du tirage au remboursement', 'WAL = Σ(principal amortido × dias) ÷ principal total ÷ base anual ; dias do saque ao reembolso', 'WAL = Σ(principal amortizado × días) ÷ principal total ÷ base anual ; días del desembolso al pago', 'WAL = Σ(погашенный долг × дни) ÷ весь долг ÷ база года ; дни от выдачи до погашения', 'WAL = Σ(الأصل المسدد × الأيام) ÷ إجمالي الأصل ÷ أساس السنة ؛ الأيام من السحب حتى السداد'],
   short3xIns: ['3 倍保险金额 × 赔比', '3 × insured amount × cover ratio', '3 × montant assuré × taux', '3 × valor segurado × proporção', '3 × monto asegurado × proporción', '3× страховая сумма × доля возмещения', '3 أضعاف مبلغ التأمين × نسبة التعويض'],
   kEquity3: ['3 倍权益基数', '3x equity base', 'Base de fonds propres 3x', 'Base de capital 3×', 'Base de capital 3×', '3× база капитала', '3 أضعاف قاعدة الملكية'],
   kAllIn: ['名义利率（基准 + 利差）', 'Nominal rate (base + margin)', 'Taux nominal (base + marge)', 'Taxa nominal (base + spread)', 'Tipo nominal (base + margen)', 'Номинальная ставка (база + маржа)', 'السعر الاسمي (مرجعي + هامش)'],
@@ -1967,6 +1988,12 @@ if (typeof window !== 'undefined') window.Core = Core;
       ic.options[0].textContent = t1('idcPay');
       ic.options[1].textContent = t1('idcCap');
     }
+    var icl = $('#inClass');
+    if (icl) {
+      icl.options[0].textContent = t1('classA');
+      icl.options[1].textContent = t1('classB');
+      icl.options[2].textContent = t1('classC');
+    }
 
     renderLangUI();
     renderBench();
@@ -2038,6 +2065,13 @@ if (typeof window !== 'undefined') window.Core = Core;
     $('#fieldBalloon').hidden = (inp.repayType !== 'balloon');
     $('#inCover').value = inp.insured === false ? 'off' : 'on';
     $('#inPrem').value = fmtInput(inp.premRate * 100, 4);
+    if ($('#inClass')) {
+      var rv = inp.premRate * 100, cls = 'C';
+      ['A', 'B', 'C'].forEach(function (k) {
+        if (Math.abs(rv - lookupPrem('3', k)) < 1e-6 || Math.abs(rv - lookupPrem('10', k)) < 1e-6) cls = k;
+      });
+      $('#inClass').value = cls;
+    }
     $('#inPremBasis').value = inp.premBasis;
     $('#inDrawFreq').value = fmtInput(inp.drawStepMonths || 3, 0);
     $('#inIDC').value = inp.idcCap ? 'cap' : 'pay';
@@ -2120,6 +2154,7 @@ if (typeof window !== 'undefined') window.Core = Core;
     var YUNIT2 = { zh: '年', en: 'yrs', fr: 'ans', pt: 'anos', es: 'años', ru: 'лет', ar: 'سنة' };
     $('#kWAL').innerHTML = num(m.wal, 2) + '<span class="unit">' + (YUNIT2[lang] || 'yrs') + '</span>';
     $('#kWALS').textContent = t1('kMonths', lang) + ' ' + m.tenorMonths;
+    $('#kWALF').textContent = t1('walFormula', lang);
 
     kpiValue('#kEq', m.equity3);
     $('#kEqS').textContent = t1('short3xIns', lang) + ' · ' + state.cur;
@@ -2576,6 +2611,30 @@ if (typeof window !== 'undefined') window.Core = Core;
     clearTimeout(timer);
     timer = setTimeout(render, 90);
   }
+  function syncPremHint() {
+    var box = $('#premRateHint'); if (!box) return;
+    var t = premTenorKey(), k = $('#inClass').value, cur = parseNum($('#inPrem').value);
+    Array.prototype.forEach.call(box.querySelectorAll('.rt-td[data-rate]'), function (c) {
+      var rate = parseFloat(c.getAttribute('data-rate'));
+      c.classList.toggle('active', c.getAttribute('data-cls') === k && isFinite(cur) && Math.abs(rate - cur) < 1e-9);
+    });
+    var rate = lookupPrem(t, k), hint = $('#premApplyHint');
+    if (hint && rate != null) {
+      var tk = t === '3' ? 'tenor3' : 'tenor10';
+      hint.textContent = t1('premApply')
+        .replace('{T}', t1(tk))
+        .replace('{K}', t1('class' + k))
+        .replace('{R}', fmtInput(rate, 2));
+    }
+  }
+  function premTenorKey() {
+    var m = parseNum($('#inRep').value);
+    return isFinite(m) && m <= 36 ? '3' : '10';
+  }
+  function lookupPrem(t, k) {
+    var MX = { '3': { A: 1.00, B: 1.50, C: 2.50 }, '10': { A: 2.15, B: 2.86, C: 5.36 } };
+    return MX[t] && MX[t][k];
+  }
   function render() {
     var inp = readInputs();
     var msgs = C.validate(inp);
@@ -2602,6 +2661,7 @@ if (typeof window !== 'undefined') window.Core = Core;
     var ddNow = m.inp.ddMonths !== undefined ? m.inp.ddMonths : m.inp.ddYears * 12;
     updatePeriodHints(ddNow, m.inp.repMonths !== undefined ? m.inp.repMonths : m.inp.repYears * 12);
     if ($('#hDrawFreq')) $('#hDrawFreq').textContent = t1(ddNow > 0 ? 'dDrawFreq' : 'dDrawFreqZero', state.langs[0]);
+    syncPremHint();
   }
 
   /* ------------------------ export ------------------------ */
@@ -2780,6 +2840,18 @@ if (typeof window !== 'undefined') window.Core = Core;
       if (val < 0) val = 0;
       this.value = fmtInput(val, 2);
       render();
+    });
+    $('#premRateHint').addEventListener('click', function (e) {
+      var c = e.target.closest('.rt-td[data-rate]'); if (!c) return;
+      var tn = c.getAttribute('data-tenor');
+      $('#inClass').value = c.getAttribute('data-cls');
+      $('#inRep').value = fmtInput(tn === '3' ? 36 : 120, 0);
+      $('#inPrem').value = fmtInput(parseFloat(c.getAttribute('data-rate')), 2);
+      scheduleRender();
+    });
+    $('#inClass').addEventListener('change', function () {
+      var r = lookupPrem(premTenorKey(), this.value);
+      if (r != null) { $('#inPrem').value = fmtInput(r, 2); scheduleRender(); }
     });
 
     ['#inPrice', '#inStart', '#inBase', '#inMargin', '#inDD', '#inDrawFreq', '#inRep', '#inPrem', '#inPremFin', '#inComp', '#inBalloon']
