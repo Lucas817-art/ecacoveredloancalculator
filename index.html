@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sinosure Supported Facility</title>
+<title>ECA-Supported Facility</title>
 <style>
 :root{
   --navy:#0d2440; --navy2:#173d68; --ink:#1f2a37; --muted:#6b7b8f; --line:#e4ebf3;
@@ -134,6 +134,10 @@ body{
 .field.period{flex-wrap:wrap}
 .fhint{font-size:9.5px;color:#9aa8b8;text-align:right;flex:0 0 100%;margin-top:-3px;line-height:1.2;min-height:11px}
 .fhint{font-size:9.5px;color:#9aa8b8;text-align:right;margin-top:-2px;line-height:1.2}
+.rate-tbl{flex:0 0 100%;display:grid;grid-template-columns:1.35fr 1fr 1fr 1fr;gap:1px;background:#e6edf4;border:1px solid #e6edf4;border-radius:8px;overflow:hidden;margin:5px 0 2px}
+.rate-tbl>div{background:#fff;padding:4px 6px;font-size:10px;color:#3f4d60;text-align:center;font-variant-numeric:tabular-nums}
+.rate-tbl .rt-th{font-weight:600;color:#6b7b8f;background:#f6f9fc}
+.rate-tbl .rt-td:first-child{text-align:left;color:#5a6a7d}
 .inp input[type=date]{text-align:left;padding-right:8px;font-size:11.5px}
 .switch{width:42px;height:22px;border-radius:12px;background:#dbe4ee;position:relative;cursor:pointer;transition:.18s;flex:0 0 auto}
 .switch::after{content:"";position:absolute;width:16px;height:16px;border-radius:50%;background:#fff;top:3px;left:3px;transition:.18s;box-shadow:0 1px 3px rgba(0,0,0,.22)}
@@ -142,6 +146,21 @@ body{
 .derived{margin-top:10px;background:#f7fafd;border:1px solid #e7eef6;border-radius:10px;padding:8px 10px}
 .derived .row{display:flex;justify-content:space-between;gap:8px;font-size:11px;padding:3px 0;color:#5a6b80}
 .derived .row b{font-weight:650;color:#16283d;font-variant-numeric:tabular-nums}
+
+/* ---------- CNY forward hedge ---------- */
+.hedgeblock{flex-wrap:wrap;border-top:1px solid #eef3f8;margin-top:6px;padding-top:9px}
+.hedge-title{font-weight:600;color:#16283d;flex:1 1 100%}
+.hedge-grid{display:flex;gap:10px;flex:1 1 100%;margin-top:8px}
+.hedge-in{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;font-size:10.5px;color:#5a6b80}
+.hedge-in input{width:100%;height:30px;border:1px solid #d9e2ec;border-radius:7px;background:#fbfdff;padding:0 9px;font:inherit;font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums;outline:none;transition:.15s}
+.hedge-in input:focus{border-color:#7ea6cc;background:#fff;box-shadow:0 0 0 3px rgba(30,74,118,.10)}
+.hedge-rows{flex:1 1 100%;background:#f7fafd;border:1px solid #e7eef6;border-radius:10px;padding:7px 10px;margin-top:8px}
+.hedge-rows .row{display:flex;justify-content:space-between;gap:8px;font-size:11px;padding:3px 0;color:#5a6b80}
+.hedge-rows .row b{font-weight:650;color:#16283d;font-variant-numeric:tabular-nums}
+.hedgeblock .fx-formula{flex:1 1 100%;font-size:9.5px;color:#8b99aa;line-height:1.45;margin-top:7px}
+.hedge-links{flex:1 1 100%;display:flex;gap:12px;margin-top:5px;font-size:10px;flex-wrap:wrap}
+.hedge-links a{color:#1565c0;text-decoration:none}
+[dir=rtl] .hedge-in input{text-align:left}
 
 /* ---------- alert ---------- */
 .alert{
@@ -170,6 +189,7 @@ body{
 .card-head h3{margin:0;font-size:13px;font-weight:650;color:#12283f;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
 .card-head h3 .xl2{font-size:10.5px;color:#93a1b3;font-weight:500}
 .card-head .meta{font-size:10.5px;color:#8b99aa;display:flex;align-items:center;gap:8px}
+.tblnote{font-size:10px;color:#93a1b3;margin-top:6px;line-height:1.4}
 .badge{display:inline-flex;align-items:center;gap:4px;border-radius:20px;padding:2px 8px;font-size:10px;border:1px solid #cfe6da;background:#f2fbf6;color:#1f6f5c;white-space:nowrap}
 .badge[hidden]{display:none}
 .badge.warn{border-color:#f0dcb0;background:#fff9ec;color:#8a5a12}
@@ -202,6 +222,17 @@ table.grid tbody tr.grace td:first-child{box-shadow:inset 3px 0 0 #c8a24a}
 table.grid tbody tr.final td{background:#fffaef}
 table.grid tr.total td{font-weight:700;background:#f6f9fd;border-top:2px solid #dde7f2;color:#0f2740}
 .grace-tag{display:inline-block;font-size:9px;color:#8a6414;background:#fdf3d9;border-radius:4px;padding:0 4px;margin-left:4px;vertical-align:1px}
+.cap-tag{display:inline-block;font-size:9px;color:#1f5d8a;background:#e9f2fa;border-radius:4px;padding:0 4px;margin-left:4px;vertical-align:1px}
+.acc-tag{display:inline-block;font-size:9px;color:#7a8797;background:#f1f4f8;border-radius:4px;padding:0 4px;margin-left:4px;vertical-align:1px}
+.pay-tag{display:inline-block;font-size:9px;color:#2c6a45;background:#e7f3ec;border-radius:4px;padding:0 4px;margin-left:4px;vertical-align:1px}
+.exp{display:inline-block;color:#8b99aa;font-size:10px;margin-right:4px;cursor:pointer;transition:transform .15s}
+.exp.open{transform:rotate(90deg)}
+tr.has-detail{cursor:pointer}
+.detail-row td{background:#f7fafc;padding:6px 12px}
+.detail-row .dt{width:100%;border-collapse:collapse;font-size:11px}
+.detail-row .dt th{color:#8b99aa;font-weight:600;padding:4px 8px;text-align:right;border-bottom:1px solid #e6edf4}
+.detail-row .dt th.l,.detail-row .dt td.l{text-align:left}
+.detail-row .dt td{padding:4px 8px;text-align:right;border-bottom:1px dashed #eef3f8}
 
 /* sensitivity */
 .senswrap{overflow-x:auto}
@@ -246,7 +277,7 @@ footer{max-width:1560px;margin:0 auto;padding:0 24px 26px;font-size:10px;color:#
 .flags .flag + .flag{margin-left:2px}
 .langmenu{
   position:absolute;right:0;top:38px;background:#fff;color:var(--ink);border:1px solid var(--line);
-  border-radius:10px;box-shadow:0 14px 34px rgba(10,26,45,.20);padding:5px;min-width:206px;z-index:60;
+  border-radius:10px;box-shadow:0 14px 34px rgba(10,26,45,.20);padding:5px;min-width:232px;z-index:60;
 }
 .langmenu[hidden]{display:none}
 .langmenu button{
@@ -256,6 +287,17 @@ footer{max-width:1560px;margin:0 auto;padding:0 24px 26px;font-size:10px;color:#
 .langmenu button:hover{background:#f2f6fa}
 .langmenu button.on{background:#e9f1f9;font-weight:600}
 .langmenu .lname{flex:1}
+.langmenu .langauto{
+  display:flex;align-items:center;gap:8px;justify-content:space-between;
+  margin:6px 3px 1px;padding:7px 5px 1px;border-top:1px dashed #e6edf4;font-size:10px;color:#8b99aa;line-height:1.45;
+}
+.langmenu .langauto[hidden]{display:none}
+.langmenu .langauto span{flex:1}
+.langmenu .langauto button{
+  width:auto;flex:0 0 auto;padding:2px 6px;border:1px solid #d9e2ec;border-radius:6px;background:#f7fafd;
+  font-size:10px;color:#3b5468;
+}
+.langmenu .langauto button:hover{background:#eef4fa}
 .livebar{display:flex;align-items:center;gap:8px;padding:6px 0 1px;flex-wrap:wrap}
 .chipbtn{
   border:1px solid #d9e2ec;background:#f7fafd;border-radius:7px;height:24px;padding:0 9px;
@@ -421,6 +463,11 @@ footer{max-width:1560px;margin:0 auto;padding:0 24px 26px;font-size:10px;color:#
       <div class="fhint" id="hDD"></div>
     </div>
     <div class="field period">
+      <label class="fl" for="inDrawFreq" data-i18n="fDrawFreq"></label>
+      <div class="inp wide-sfx"><input id="inDrawFreq" type="text" inputmode="decimal" maxlength="2"><span class="sfx" data-i18n="unitMons"></span></div>
+      <div class="fhint" id="hDrawFreq" data-i18n="dDrawFreq"></div>
+    </div>
+    <div class="field period">
       <label class="fl" for="inRep" data-i18n="fRepay"></label>
       <div class="inp wide-sfx"><input id="inRep" type="text" inputmode="decimal"><span class="sfx" data-i18n="unitMons"></span></div>
       <div class="fhint" id="hRep"></div>
@@ -431,33 +478,76 @@ footer{max-width:1560px;margin:0 auto;padding:0 24px 26px;font-size:10px;color:#
     </div>
     <div class="field">
       <label class="fl" for="inRepType" data-i18n="fRepayType"></label>
-      <div class="inp"><select id="inRepType"><option value="equal">等额本金</option><option value="balloon">期末还本</option></select></div>
+      <div class="inp"><select id="inRepType"><option value="equal">等额本金</option><option value="annuity">等额本息</option><option value="balloon">期末还本</option></select></div>
     </div>
     <div class="field" id="fieldBalloon" hidden>
       <label class="fl" for="inBalloon" data-i18n="fBalloonShare"></label>
       <div class="inp"><input id="inBalloon" type="text" inputmode="decimal"><span class="sfx">%</span></div>
     </div>
     <div class="field">
+      <label class="fl" for="inCover" data-i18n="fCover"></label>
+      <div class="inp"><select id="inCover"><option value="on"></option><option value="off"></option></select></div>
+    </div>
+    <div class="field period" id="fieldPrem">
       <label class="fl" for="inPrem" data-i18n="fPremRate"></label>
       <div class="inp"><input id="inPrem" type="text" inputmode="decimal"><span class="sfx">%</span></div>
+      <div class="rate-tbl" id="premRateHint">
+        <div class="rt-th" data-i18n="rtTenor"></div>
+        <div class="rt-th" data-i18n="ccA"></div>
+        <div class="rt-th" data-i18n="ccB"></div>
+        <div class="rt-th" data-i18n="ccC"></div>
+        <div class="rt-td" data-i18n="tenor3"></div>
+        <div class="rt-td">1.00%</div>
+        <div class="rt-td">1.50%</div>
+        <div class="rt-td">2.50%</div>
+        <div class="rt-td" data-i18n="tenor10"></div>
+        <div class="rt-td">2.15%</div>
+        <div class="rt-td">2.86%</div>
+        <div class="rt-td">5.36%</div>
+      </div>
     </div>
-    <div class="field">
+    <div class="field" id="fieldPremBasis">
       <label class="fl" for="inPremBasis" data-i18n="fPremBasis"></label>
       <div class="inp"><select id="inPremBasis"><option value="PI">本+息</option><option value="P">仅本金</option></select></div>
     </div>
-    <div class="field">
+    <div class="field" id="fieldPremFin">
       <label class="fl" for="inPremFin" data-i18n="fPremFin"></label>
       <div class="inp"><input id="inPremFin" type="text" inputmode="decimal" maxlength="6"><span class="sfx">%</span></div>
     </div>
+    <div class="field" id="fieldComp">
+      <label class="fl" for="inComp" data-i18n="fCompRatio"></label>
+      <div class="inp"><input id="inComp" type="text" inputmode="decimal" maxlength="6"><span class="sfx">%</span></div>
+    </div>
     <div class="field">
       <label class="fl" for="inIDC" data-i18n="fIdc"></label>
-      <div class="inp"><input id="inIDC" type="text" inputmode="decimal"><span class="sfx" id="sfxCur2">USD</span></div>
+      <div class="inp"><select id="inIDC"><option value="pay"></option><option value="cap"></option></select></div>
+    </div>
+
+    <div class="field hedgeblock" id="hedgeBlock" hidden>
+      <div class="fl hedge-title" data-i18n="fxHedgeTitle"></div>
+      <div class="hedge-grid">
+        <label class="hedge-in"><span data-i18n="fxHedgeSpot"></span><input id="hedgeSpot" type="text" inputmode="decimal" placeholder="6.6544"></label>
+        <label class="hedge-in"><span data-i18n="fxHedgeFwd"></span><input id="hedgeFwd" type="text" inputmode="decimal" placeholder="6.5994"></label>
+      </div>
+      <div class="fhint" id="hedgeTenor"></div>
+      <div class="hedge-rows">
+        <div class="row"><span data-i18n="fxHedgeCost"></span><b id="hedgeCost">—</b></div>
+        <div class="row"><span data-i18n="fxHedgeEquivUSD"></span><b id="hedgeCostUSD">—</b></div>
+        <div class="row"><span data-i18n="fxHedgeRatio"></span><b id="hedgeRatio">—</b></div>
+      </div>
+      <div class="fx-formula" id="hedgeFormula" data-i18n="fxHedgeFormula"></div>
+      <div class="hedge-links">
+        <a href="https://www.boc.cn/sourcedb/whpj/" target="_blank" rel="noopener">↗ <span data-i18n="fxHedgeLinks"></span></a>
+        <a href="https://www.boc.cn/sourcedb/ffx/index.html" target="_blank" rel="noopener">↗ <span data-i18n="fxFwdLinkShort"></span></a>
+      </div>
+      <div class="fhint" id="hedgeMsg"></div>
     </div>
 
     <div class="derived">
       <div class="row"><span data-i18n="derivedLoan"></span><b id="dLoan">—</b></div>
       <div class="row"><span data-i18n="derivedFacility"></span><b id="dFac">—</b></div>
-      <div class="row"><span data-i18n="derivedFinPrem"></span><b id="dFinPrem">—</b></div>
+      <div class="row" id="rowFinPrem"><span data-i18n="derivedFinPrem"></span><b id="dFinPrem">—</b></div>
+      <div class="row" id="rowIdc" hidden><span data-i18n="kIdc"></span><b id="dIdc">—</b></div>
     </div>
   </aside>
 
@@ -470,17 +560,17 @@ footer{max-width:1560px;margin:0 auto;padding:0 24px 26px;font-size:10px;color:#
         <div class="kv" id="kFac">—</div>
         <div class="ks" id="kFacS"></div>
       </div>
-      <div class="kpi gold">
+      <div class="kpi gold" id="kpiPrem">
         <div class="kl" data-i18n="kPremium"></div>
         <div class="kv" id="kPrem">—</div>
         <div class="ks" id="kPremS"></div>
       </div>
-      <div class="kpi">
+      <div class="kpi" id="kpiIns">
         <div class="kl" data-i18n="kInsured"></div>
         <div class="kv" id="kIns">—</div>
         <div class="ks" id="kInsS"></div>
       </div>
-      <div class="kpi">
+      <div class="kpi" id="kpiPRate">
         <div class="kl" data-i18n="kPRate"></div>
         <div class="kv" id="kPRate">—</div>
         <div class="ks" id="kPRateS"></div>
@@ -500,7 +590,7 @@ footer{max-width:1560px;margin:0 auto;padding:0 24px 26px;font-size:10px;color:#
         <div class="kv" id="kWAL">—</div>
         <div class="ks" id="kWALS"></div>
       </div>
-      <div class="kpi">
+      <div class="kpi" id="kpiEq">
         <div class="kl" data-i18n="kEquity3"></div>
         <div class="kv" id="kEq">—</div>
         <div class="ks" id="kEqS"></div>
@@ -514,8 +604,9 @@ footer{max-width:1560px;margin:0 auto;padding:0 24px 26px;font-size:10px;color:#
       </div>
       <div class="irrgrid">
         <div class="irrcell hero"><div class="kl" data-i18n="kIRRAll"></div><div class="kv" id="irrAll">—</div></div>
-        <div class="irrcell"><div class="kl" data-i18n="kIRRExcl"></div><div class="kv small" id="irrExcl">—</div></div>
-        <div class="irrcell"><div class="kl" data-i18n="kIRRUpBp"></div><div class="kv small gold" id="bpUp">—</div></div>
+        <div class="irrcell" id="irrExclCell"><div class="kl" data-i18n="kIRRExcl"></div><div class="kv small" id="irrExcl">—</div></div>
+        <div class="irrcell" id="bpUpCell"><div class="kl" data-i18n="kIRRUpBp"></div><div class="kv small gold" id="bpUp">—</div></div>
+        <div class="irrcell" id="irrHedgeCell" hidden><div class="kl" data-i18n="fxHedgeInIRR"></div><div class="kv small gold" id="irrHedge">—</div></div>
       </div>
     </div>
 
@@ -560,6 +651,7 @@ footer{max-width:1560px;margin:0 auto;padding:0 24px 26px;font-size:10px;color:#
           <tbody id="gridBody"></tbody>
         </table>
       </div>
+      <div class="tblnote" data-i18n="tailNote"></div>
     </div>
 
     <details class="notes" open>
@@ -576,149 +668,172 @@ footer{max-width:1560px;margin:0 auto;padding:0 24px 26px;font-size:10px;color:#
 
 <script>
 /* =========================================================
-   Sinosure Facility P&I model — core (i18n + engine + xlsx)
+   ECA Facility P&I model — core (i18n + engine + xlsx)
    Pure functions, no DOM. Usable in browser and Node.
    ========================================================= */
 var LANGS = ['zh', 'en', 'fr'];
 
 var DICT = {
-  appTitle: ['信保支持中长期买贷计算器', 'Sinosure Supported Facility', 'Sinosure Supported Facility'],
-  appSub: ['还款计划与本息测算 · 出口信用保险支持', 'Repayment schedule and interest estimation · export credit insurance supported', 'Échéancier et estimation des intérêts · soutien de l’assurance-crédit à l’exportation'],
-  langLabel: ['语言', 'Language', 'Langue'],
-  export: ['导出 Excel', 'Export Excel', 'Exporter Excel'],
-  print: ['打印', 'Print', 'Imprimer'],
-  reset: ['恢复附件参数', 'Source defaults', 'Valeurs du fichier source'],
-
-  secAssumptions: ['参数假设', 'Assumptions', 'Hypothèses'],
-  secSummary: ['核心结果', 'Key results', 'Résultats clés'],
-  secSchedule: ['本息还款计划', 'Repayment schedule', 'Échéancier'],
-  secChart: ['还款结构', 'Payment profile', 'Profil des échéances'],
-  secSensitivity: ['利率敏感性', 'Rate sensitivity', 'Sensibilité aux taux'],
-  secNotes: ['模型说明与口径', 'Model notes and conventions', 'Notes et conventions'],
-
-  fPrice: ['合同价格', 'Contract price', 'Prix du contrat'],
-  fStart: ['起算日', 'Commencement date', "Date d'effet"],
-  fEquityDebt: ['资本结构', 'Equity : Debt', 'Fonds propres : dette'],
-  fLtv: ['债务占比（Debt share）', 'Debt share', 'Part de dette'],
-  fBase: ['基准利率（SOFR）', 'Base rate (SOFR)', 'Taux de référence (SOFR)'],
-  fBaseSOFR: ['基准利率（SOFR）', 'Base rate (SOFR)', 'Taux de référence (SOFR)'],
-  fBaseLPR: ['基准利率（LPR 5年）', 'Base rate (LPR 5Y)', 'Taux de référence (LPR 5 ans)'],
-  fBaseESTR: ['基准利率（3M EURIBOR）', 'Base rate (3M EURIBOR)', 'Taux de référence (EURIBOR 3 mois)'],
-  fBaseSONIA: ['基准利率（SONIA）', 'Base rate (SONIA)', 'Taux de référence (SONIA)'],
-  fMargin: ['利差', 'Margin', 'Marge'],
-  fBasis: ['计息基数', 'Interest basis', 'Base de calcul'],
-  fDrawdown: ['提款期（月）', 'Drawdown period (months)', 'Période de tirage (mois)'],
-  fRepay: ['还款期（月）', 'Repayment period (months)', "Période d'amortissement (mois)"],
-  fFreq: ['每年还款次数', 'Payments per year', 'Échéances par an'],
-  fRepayType: ['还款方式', 'Repayment type', 'Mode de remboursement'],
-  optEqual: ['等额本金', 'Equal principal', 'Amortissement constant'],
-  optBalloon: ['期末还本（Balloon）', 'Balloon (principal at maturity)', 'Ballon (in fine)'],
-  fBalloonShare: ['期末还本比例', 'Balloon share', 'Part remboursée in fine'],
-  fPremRate: ['信保费率', 'Sinosure premium rate', 'Taux de prime Sinosure'],
-  fPremBasis: ['保费计费基础', 'Premium basis', 'Base de prime'],
-  fPremFin: ['保费融资比例（上限 85%）', 'Premium financing ratio (max 85%)', 'Part de prime financée (max 85 %)'],
-  fIdc: ['融资建设期利息', 'Financed IDC', 'Intérêts intercalaires financés'],
-  fCurrency: ['币种', 'Currency', 'Devise'],
-  optBasis360: ['实际天数 / 360', 'Actual / 360', 'Réel / 360'],
-  optBasis365: ['实际天数 / 365', 'Actual / 365', 'Réel / 365'],
-  optPI: ['本+息', 'Principal + Interest', 'Principal + Intérêts'],
-  optP: ['仅本金', 'Principal only', 'Principal seul'],
-  onOffOn: ['是', 'Yes', 'Oui'],
-  onOffOff: ['否', 'No', 'Non'],
-  shortPI: ['本+息', 'Principal + Interest', 'Principal + Intérêts'],
-  shortP: ['本金', 'Principal', 'Principal'],
-  unitMons: ['月', 'months', 'mois'],
-  unitYrs: ['年', 'yrs', 'ans'],
+  appTitle: ['ECA 支持中长期买贷计算器', 'ECA-Supported Facility', 'Facilité soutenue par l’ECA', 'Financiamento apoiado pela ECA', 'Financiamiento apoyado por la ECA', 'Кредит под покрытием ECA', 'تسهيلات مدعومة من وكالة ائتمان الصادرات (ECA)'],
+  appSub: ['还款计划与本息测算 · 出口信用保险支持', 'Repayment schedule and interest estimation · export credit insurance supported', 'Échéancier et estimation des intérêts · soutien de l’assurance-crédit à l’exportation', 'Cronograma de amortização e estimativa de juros · apoiado por seguro de crédito à exportação', 'Plan de amortización y estimación de intereses · apoyado por seguro de crédito a la exportación', 'График погашения и расчёт процентов · поддержка страхования экспортного кредита', 'جدول السداد وتقدير الفوائد · بدعم من تأمين ائتمان الصادرات'],
+  langLabel: ['语言', 'Language', 'Langue', 'Idioma', 'Idioma', 'Язык', 'اللغة'],
+  autoLangBusy: ['正在识别访问地…', 'Detecting your location…', 'Détection du lieu de visite…', 'A identificar a localização…', 'Detectando la ubicación…', 'Определяем местоположение…', 'جارٍ تحديد موقع الزيارة…'],
+  autoLangDone: ['按访问地选择', 'Auto by location', 'Selon le lieu', 'Por localização', 'Por ubicación', 'По местоположению', 'حسب الموقع'],
+  autoLangManual: ['手动选择', 'Manual choice', 'Choix manuel', 'Escolha manual', 'Selección manual', 'Ручной выбор', 'اختيار يدوي'],
+  autoLangLocal: ['浏览器语言', 'Browser language', 'Langue du navigateur', 'Idioma do navegador', 'Idioma del navegador', 'Язык браузера', 'لغة المتصفح'],
+  autoLangRe: ['重新识别', 'Re-detect', 'Détecter', 'Redetectar', 'Redetectar', 'Определить', 'إعادة التحديد'],
+  export: ['导出 Excel', 'Export Excel', 'Exporter Excel', 'Exportar Excel', 'Exportar Excel', 'Экспорт Excel', 'تصدير Excel'],
+  print: ['打印', 'Print', 'Imprimer', 'Imprimir', 'Imprimir', 'Печать', 'طباعة'],
+  reset: ['恢复样本参数', 'Sample defaults', 'Valeurs du modèle', 'Valores de amostra', 'Valores de muestra', 'Исходные значения', 'القيم الافتراضية'],
+  secAssumptions: ['参数假设', 'Assumptions', 'Hypothèses', 'Premissas', 'Supuestos', 'Исходные допущения', 'الافتراضات'],
+  secSummary: ['核心结果', 'Key results', 'Résultats clés', 'Resultados principais', 'Resultados clave', 'Ключевые результаты', 'النتائج الرئيسية'],
+  secSchedule: ['本息还款计划', 'Repayment schedule', 'Échéancier', 'Cronograma de amortização', 'Plan de amortización', 'График погашения', 'جدول السداد'],
+  secChart: ['还款结构', 'Payment profile', 'Profil des échéances', 'Perfil de pagamentos', 'Perfil de pagos', 'Структура платежей', 'هيكل السداد'],
+  secSensitivity: ['利率敏感性', 'Rate sensitivity', 'Sensibilité aux taux', 'Sensibilidade às taxas', 'Sensibilidad a tipos', 'Чувствительность к ставке', 'الحساسية لسعر الفائدة'],
+  secNotes: ['模型说明与口径', 'Model notes and conventions', 'Notes et conventions', 'Notas e convenções', 'Notas y convenciones', 'Примечания и допущения', 'ملاحظات النموذج'],
+  fPrice: ['合同价格', 'Contract price', 'Prix du contrat', 'Preço do contrato', 'Precio del contrato', 'Цена контракта', 'سعر العقد'],
+  fStart: ['起算日', 'Commencement date', 'Date d\'effet', 'Data de início', 'Fecha de inicio', 'Дата начала', 'تاريخ البدء'],
+  fEquityDebt: ['资本结构', 'Equity : Debt', 'Fonds propres : dette', 'Capital : Dívida', 'Capital : Deuda', 'Капитал : Долг', 'حقوق الملكية : الدين'],
+  fLtv: ['债务占比（Debt share）', 'Debt share', 'Part de dette', 'Parcela de dívida', 'Parte de deuda', 'Доля долга', 'نسبة الدين'],
+  fBase: ['基准利率（SOFR）', 'Base rate (SOFR)', 'Taux de référence (SOFR)', 'Taxa referencial (SOFR)', 'Tipo de referencia (SOFR)', 'Базовая ставка (SOFR)', 'السعر المرجعي (SOFR)'],
+  fBaseSOFR: ['基准利率（SOFR）', 'Base rate (SOFR)', 'Taux de référence (SOFR)', 'Taxa referencial (SOFR)', 'Tipo de referencia (SOFR)', 'Базовая ставка (SOFR)', 'السعر المرجعي (SOFR)'],
+  fBaseLPR: ['基准利率（LPR 5年）', 'Base rate (LPR 5Y)', 'Taux de référence (LPR 5 ans)', 'Taxa LPR 5 anos', 'Tipo LPR 5 años', 'Ставка LPR 5 лет', 'السعر المرجعي LPR 5 سنوات'],
+  fBaseESTR: ['基准利率（3M EURIBOR）', 'Base rate (3M EURIBOR)', 'Taux de référence (EURIBOR 3 mois)', 'Taxa EURIBOR 3M', 'Tipo EURIBOR 3M', 'Ставка EURIBOR 3M', 'السعر المرجعي EURIBOR 3 أشهر'],
+  fBaseSONIA: ['基准利率（SONIA）', 'Base rate (SONIA)', 'Taux de référence (SONIA)', 'Taxa SONIA', 'Tipo SONIA', 'Ставка SONIA', 'السعر المرجعي SONIA'],
+  fMargin: ['利差', 'Margin', 'Marge', 'Spread', 'Margen', 'Маржа', 'الهامش'],
+  fBasis: ['计息基数', 'Interest basis', 'Base de calcul', 'Base de juros', 'Base de cálculo', 'Денежная база', 'أساس احتساب الفائدة'],
+  fDrawdown: ['宽限期（月）', 'Grace period (months)', 'Période de grâce (mois)', 'Período de carência (meses)', 'Período de carencia (meses)', 'Льготный период (мес.)', 'فترة السماح (شهور)'],
+  fRepay: ['还款期（月）', 'Repayment period (months)', 'Période d\'amortissement (mois)', 'Período de amortização (meses)', 'Período de amortización (meses)', 'Период погашения (мес.)', 'فترة السداد (شهور)'],
+  fFreq: ['每年还款次数', 'Payments per year', 'Échéances par an', 'Pagamentos por ano', 'Pagos al año', 'Платежей в год', 'عدد الدفعات سنوياً'],
+  fRepayType: ['还款方式', 'Repayment type', 'Mode de remboursement', 'Tipo de amortização', 'Tipo de amortización', 'Способ погашения', 'طريقة السداد'],
+  optEqual: ['等额本金', 'Equal principal', 'Amortissement constant', 'Amortização constante', 'Amortización constante', 'Равными долями', 'أصل متساوٍ'],
+  optAnnuity: ['等额本息', 'Equal installment (annuity)', 'Annuité constante', 'Prestação constante', 'Cuota constante (anualidad)', 'Аннуитет (равный платёж)', 'قسط متساوٍ (أصل وفائدة)'],
+  optBalloon: ['期末还本（Balloon）', 'Balloon (principal at maturity)', 'Ballon (in fine)', 'Balloon (saldo no vencimento)', 'Globo (saldo al vencimiento)', 'Баллон (остаток в конце)', 'دفعة بالون عند الاستحقاق'],
+  fBalloonShare: ['期末还本比例', 'Balloon share', 'Part remboursée in fine', 'Parcela do ballon', 'Parte del globo', 'Доля баллона', 'نسبة دفعة البالون'],
+  fCover: ['是否有 ECA 承保', 'ECA cover', 'Couverture ECA', 'Seguro ECA', 'Seguro ECA', 'Покрытие ECA', 'تغطية ECA'],
+  optCoverOn: ['投保', 'With cover', 'Avec assurance', 'Com seguro', 'Con seguro', 'Со страховкой', 'مع التأمين'],
+  optCoverOff: ['不投保', 'No cover', 'Sans assurance', 'Sem seguro', 'Sin seguro', 'Без страховки', 'بدون تأمين'],
+  fPremRate: ['ECA 保费费率', 'ECA premium rate', 'Taux de prime ECA', 'Taxa de prêmio ECA', 'Tasa de prima ECA', 'Ставка премии ECA', 'معدل قسط ECA'],
+  fPremBasis: ['保费计费基础', 'Premium basis', 'Base de prime', 'Base do prêmio', 'Base de prima', 'База премии', 'أساس احتساب القسط'],
+  fPremFin: ['保费融资比例（上限 85%）', 'Premium financing ratio (max 85%)', 'Part de prime financée (max 85 %)', 'Prêmio financiado (máx. 85%)', 'Prima financiada (máx. 85%)', 'Финансированная премия (макс. 85%)', 'تمويل القسط (حد أقصى 85%)'],
+  fCompRatio: ['保险公司赔偿比例', 'ECA Indemnify Ratio', 'Taux de prise en charge de l’assureur', 'Proporção de indenização da seguradora', 'Proporción de indemnización del asegurador', 'Доля страхового возмещения', 'نسبة تعويض شركة التأمين'],
+  fIdc: ['建设期利息处理', 'Construction interest', 'Intérêts intercalaires', 'Juros de construção', 'Intereses de construcción', 'Проценты строительства', 'فوائد فترة الإنشاء'],
+  idcPay: ['自付（不计入融资）', 'Paid in cash (not financed)', 'Payés comptant (non financés)', 'Pago em caixa (não financiado)', 'Pagados en efectivo (no financiados)', 'Платить деньгами', 'دفع نقدي'],
+  idcCap: ['资本化（计入本金）', 'Capitalized into principal', 'Capitalisés (ajoutés au principal)', 'Capitalizados no principal', 'Capitalizados al principal', 'Капитализировать в долг', 'رسملة في الأصل'],
+  fDrawFreq: ['提款节奏', 'Drawdown frequency', 'Rythme des tirages', 'Ritmo dos desembolsos', 'Ritmo de disposiciones', 'График выборок', 'وثيرة السحب'],
+  drawM1: ['每月一次', 'Monthly', 'Mensuel', 'Mensal', 'Mensual', 'Ежемесячно', 'شهرياً'],
+  drawM2: ['每两个月一次', 'Every 2 months', 'Tous les 2 mois', 'A cada 2 meses', 'Cada 2 meses', 'Каждые 2 месяца', 'كل شهرين'],
+  drawM3: ['每季度一次', 'Quarterly', 'Trimestriel', 'Trimestral', 'Trimestral', 'Ежеквартально', 'كل ربع سنة'],
+  drawM6: ['每半年一次', 'Semi-annual', 'Semestriel', 'Semestral', 'Semestral', 'Раз в полгода', 'كل نصف سنة'],
+  dDrawFreqZero: ['宽限期为 0 时一次性全额放款，提款节奏不生效。', 'No grace period: the facility is drawn in full upfront, so the rhythm has no effect.', 'Sans période de grâce, le tirage est intégral : le rythme est sans effet.', 'Sem carência, o saque é integral: o ritmo não tem efeito.', 'Sin carencia, la disposición es total: el ritmo no aplica.', 'Без льготного периода выборка разовая — график не влияет.', 'بدون فترة سماح يتم السحب دفعة واحدة؛ الوثيرة لا تؤثر.'],
+  dDrawFreq: ['1 = 每月，6 = 每半年；建设期按提款期次逐行列出。', '1 = monthly, 6 = semi-annual; construction rows follow each tranche.', '1 = mensuel, 6 = semestriel ; chaque tirage a sa propre ligne.', '1 = mensal, 6 = semestral; cada saque tem sua linha.', '1 = mensual, 6 = semestral; cada disposición tiene su línea.', '1 = ежемесячно, 6 = раз в полгода; каждая выборка — отдельная строка.', '1 = شهرياً، 6 = كل نصف سنة؛ كل سحب في سطر مستقل.'],
+  kIdc: ['资本化建设期利息', 'Capitalized IDC', 'Intérêts intercalaires capitalisés', 'IDC capitalizado', 'IDC capitalizado', 'Капитализированные проценты', 'فوائد الإنشاء المرسملة'],
+  kPIcapSub: ['资本化利息已计入融资总额', 'IDC capitalized into the facility', 'Intérêts capitalisés inclus dans la facilité', 'IDC capitalizado na facilidade', 'IDC capitalizado en la facilidad', 'Проценты капитализированы в сумме', 'الفوائد المرسملة ضمن التسهيل'],
+  notePay: ['付息日与还款日同频（每半年一次）：建设期按月提款只改变余额；计划表按半年列示，点开每期可查看该期按月计提的利息明细。', 'Interest settles on the repayment dates (semi-annual): monthly drawdowns change the balance only. The schedule shows half-year rows; expand a period to see its monthly accrual breakdown.', 'Les intérêts sont réglés aux dates d’échéance (semestrielles) : les tirages mensuels ne changent que le solde ; le tableau montre des lignes semestrielles, dépliables en détail mensuel.', 'Os juros liquidam nas datas de vencimento (semestrais): saques mensais mudam só o saldo; a tabela mostra semestres, expansíveis com detalhe mensal.', 'Los intereses se liquidan en fechas de pago (semestrales): las disposiciones mensuales solo cambian el saldo; la tabla muestra semestres, expandibles al detalle mensual.', 'Проценты платятся в даты платежей (раз в полгода): месячные выборки меняют только остаток; в таблице полугодовые строки, раскрываемые до помесячного начисления.', 'تُسدد الفوائد في تواريخ السداد (كل نصف سنة): السحب الشهري يغيّر الرصيد فقط؛ يظهر الجدول فترات نصف سنوية يمكن توسيعها لعرض تفصيل شهري.'],
+  noteIdc: ['资本化时宽限期利息计入本金、当期不产生现金支出；本息合计 = 融资总额 + 利息 − 资本化利息，避免重复计算。', 'When capitalized, grace-period interest joins principal with no cash payment; P+I = facility + interest − capitalized IDC.', 'En cas de capitalisation, les intérêts de la grâce s’ajoutent au principal, sans décaissement ; P+I = facilité + intérêts − IDC capitalisés.', 'Na capitalização, os juros da carência entram no principal, sem caixa; P+J = facilidade + juros − IDC capitalizado.', 'Al capitalizar, los intereses de la carencia pasan al principal; P+I = facilidad + intereses − IDC capitalizado.', 'При капитализации проценты льготного периода идут в долг; Д+П = сумма + проценты − капитализированные проценты.', 'عند الرسملة تُضاف فوائد فترة السماح إلى الأصل دون دفع نقدي؛ الأصل+الفائدة = التسهيل + الفوائد − الفوائد المرسملة.'],
+  tagAcc: ['计提', 'accrued', 'couru', 'incorrido', 'devengado', 'начислено', 'مستحق'],
+  tagSettle: ['付息', 'interest paid', 'intérêts payés', 'juros pagos', 'intereses pagados', 'проценты уплачены', 'دفع الفائدة'],
+  tagCap: ['资本化', 'capitalized', 'capitalisé', 'capitalizado', 'capitalizado', 'капитализ.', 'مرسمل'],
+  fCurrency: ['币种', 'Currency', 'Devise', 'Moeda', 'Moneda', 'Валюта', 'العملة'],
+  optBasis360: ['实际天数 / 360', 'Actual / 360', 'Réel / 360', 'Efectivos / 360', 'Reales / 360', 'Факт./360', 'فعلي / 360'],
+  optBasis365: ['实际天数 / 365', 'Actual / 365', 'Réel / 365', 'Efectivos / 365', 'Reales / 365', 'Факт./365', 'فعلي / 365'],
+  optPI: ['本+息', 'Principal + Interest', 'Principal + Intérêts', 'Principal + Juros', 'Principal + Intereses', 'Долг + проценты', 'أصل + فائدة'],
+  optP: ['仅本金', 'Principal only', 'Principal seul', 'Apenas principal', 'Solo principal', 'Только основной долг', 'الأصل فقط'],
+  onOffOn: ['是', 'Yes', 'Oui', 'Sim', 'Sí', 'Да', 'نعم'],
+  onOffOff: ['否', 'No', 'Non', 'Não', 'No', 'Нет', 'لا'],
+  shortPI: ['本+息', 'Principal + Interest', 'Principal + Intérêts', 'Principal + Juros', 'Principal + Intereses', 'Долг + проценты', 'أصل + فائدة'],
+  shortP: ['本金', 'Principal', 'Principal', 'Principal', 'Principal', 'Основной долг', 'الأصل'],
+  unitMons: ['月', 'months', 'mois', 'meses', 'meses', 'мес.', 'شهر'],
+  unitYrs: ['年', 'yrs', 'ans', 'anos', 'años', 'лет', 'سنة'],
   unitPct: ['%', '%', '%'],
-
   dPrice: ['项目合同金额，作为 LTV 的计算基数。', 'Contract value used as the base for LTV.', 'Montant du contrat servant de base à la quotité.'],
   dLtv: ['贷款本金 = 合同价格 × 债务占比（Equity : Debt 中的 Debt）。', 'Loan principal = contract price × debt share (Debt in Equity : Debt).', 'Principal = prix du contrat × part de dette (dette dans Fonds propres : dette).'],
   dBasis: ['利息按实际天数计，360 为美元贷款市场惯例。', 'Actual-day interest; 360 is the USD market convention.', 'Intérêts au prorata des jours réels ; 360 est la convention USD.'],
-  dDrawdown: ['该期间内等额分批提款，只付息不还本。', 'Equal tranches are drawn over this period; interest only, no principal.', 'Tirages égaux sur la période ; intérêts seuls, sans principal.'],
+  dDrawdown: ['宽限期内只付息、不还本。', 'Interest only, no principal during the grace period.', 'Intérêts seuls, sans principal pendant la période de grâce.'],
   dFreq: ['2 = 半年一期，4 = 季度，12 = 月度。', '2 = semi-annual, 4 = quarterly, 12 = monthly.', '2 = semestriel, 4 = trimestriel, 12 = mensuel.'],
   dPremRate: ['按保费计费基础 × 费率计算。', 'Applied to the premium basis.', 'Appliquée à la base de prime.'],
-  dPremFin: ['按比例将保费计入融资总额（最高 85%），余额由借款人提款前自付。', 'The financed share of the premium (max 85%) is added to the facility; the balance is paid by the borrower before drawdown.', 'La part financée de la prime (max 85 %) est ajoutée à la facilité ; le solde est réglé avant le tirage.'],
-
-  derivedLoan: ['贷款本金', 'Loan principal', 'Principal du prêt'],
-  derivedFacility: ['融资总额', 'Facility amount', 'Montant de la facilité'],
-  derivedFinPrem: ['其中融资保费', 'of which financed premium', 'dont prime financée'],
-
-  kFacility: ['融资总额', 'Facility amount', 'Montant de la facilité'],
-  kPremium: ['信保保费', 'Sinosure premium', 'Prime Sinosure'],
-  kInsured: ['保险金额（本+息）', 'Insured amount (Principal + Interest)', 'Montant assuré (Principal + Intérêts)'],
-  kInterest: ['利息合计', 'Total interest', 'Total des intérêts'],
-  kPI: ['本息合计', 'Total principal + interest', 'Total principal + intérêts'],
-  kPRate: ['P 基础费率', 'Premium rate (P basis)', 'Taux de prime (base P)'],
-  kWAL: ['加权平均期限', 'Weighted average life', 'Durée moyenne pondérée'],
-  short3xIns: ['3 倍保险金额', '3 × insured amount', '3 × montant assuré'],
-  kEquity3: ['3 倍权益基数', '3x equity base', 'Base de fonds propres 3x'],
-  kAllIn: ['名义利率（基准 + 利差）', 'Nominal rate (base + margin)', 'Taux nominal (base + marge)'],
-  kInterestRatio: ['利息 / 本金', 'Interest / principal', 'Intérêts / principal'],
-  kPeriods: ['期数', 'Periods', 'Échéances'],
-  kFirst: ['首期还款', 'First payment', 'Première échéance'],
-  kLast: ['末期还款', 'Final payment', 'Dernière échéance'],
-  kMonths: ['期限（月）', 'Tenor (months)', 'Durée (mois)'],
-  secIRR: ['全口径成本（IRR）', 'All-in cost (IRR)', 'Coût global (IRR)'],
-  kIRRAll: ['全口径 IRR', 'All-in IRR', 'IRR global'],
-  kIRRExcl: ['不含保费 IRR', 'IRR excl. premium', 'IRR hors prime'],
-  kIRRSpread: ['保费平摊后 IRR（对比）', 'IRR if premium is paid in installments (comparison)', 'IRR prime lissée (comparatif)'],
-  kIRRUpBp: ['一次性付保费', 'Upfront premium', 'Prime comptant'],
-  kIRRSpBp: ['保费平摊（对比）', 'Premium spread (comparison)', 'Prime lissée (comparatif)'],
-  kIRRSpreadNote: ['ECA 保费须在提款前一次性付清，实际成本以全口径 IRR 为准；平摊情景仅作对比参考。', 'ECA premium is paid upfront before drawdown; the all-in IRR is the actual cost. The spread case is a comparison only.', 'La prime ECA est réglée avant le tirage ; seul l\u2019IRR global reflète le coût réel. Le cas lissé est une comparaison.'],
-  irrNote: ['现金流：提款为正，还本付息与保费为负，按实际天数年化（XIRR）。', 'Cash flows: drawdowns positive; debt service and premium negative; annualized on actual days (XIRR).', 'Flux : tirages positifs ; service de la dette et prime négatifs ; annualisé en jours réels (XIRR).'],
-  edHint: ['权益 : 债务（船东自有资金占比）', 'Equity : Debt (owner equity share)', 'Fonds propres : dette'],
-
-  thPeriod: ['期次', 'No.', 'N°'],
-  thDate: ['还款日', 'Payment date', 'Date d’échéance'],
-  thDays: ['天数', 'Days', 'Jours'],
-  thOpening: ['期初余额', 'Opening balance', 'Solde initial'],
-  thDrawdown: ['提款', 'Drawdown', 'Tirage'],
-  thPrincipal: ['本金', 'Principal', 'Principal'],
-  thClosing: ['期末余额', 'Closing balance', 'Solde final'],
-  thBaseInt: ['基准利息', 'Base interest', 'Intérêts de base'],
-  thMarginInt: ['利差利息', 'Margin interest', 'Intérêts de marge'],
-  thInterest: ['利息合计', 'Total interest', 'Intérêts totaux'],
-  thTotal: ['本息合计', 'Total payment', 'Échéance totale'],
-  totalRow: ['合计', 'Total', 'Total'],
-  tagDrawdown: ['提款期', 'Drawdown', 'Tirage'],
-  currencyTag: ['币种', 'Currency', 'Devise'],
-
+  rtTenor: ['还款期', 'Tenor', 'Durée', 'Prazo', 'Plazo', 'Срок', 'المدة'],
+  ccA: ['国别 A 类', 'Country class A', 'Pays cat. A', 'País classe A', 'País clase A', 'Страна класс A', 'الدولة الفئة أ'],
+  ccB: ['国别 B 类', 'Country class B', 'Pays cat. B', 'País classe B', 'País clase B', 'Страна класс B', 'الدولة الفئة ب'],
+  ccC: ['国别 C 类', 'Country class C', 'Pays cat. C', 'País classe C', 'País clase C', 'Страна класс C', 'الدولة الفئة ج'],
+  tenor3: ['3 年', '3 yrs', '3 ans', '3 anos', '3 años', '3 года', '3 سنوات'],
+  tenor10: ['10 年', '10 yrs', '10 ans', '10 anos', '10 años', '10 лет', '10 سنوات'],
+  dPremFin: ['按比例将保费计入融资总额（最高 85%），余额由借款人放款前自付。', 'The financed share of the premium (max 85%) is added to the facility; the balance is paid by the borrower before drawdown.', 'La part financée de la prime (max 85 %) est ajoutée à la facilité ; le solde est réglé avant le tirage.'],
+  derivedLoan: ['贷款本金', 'Loan principal', 'Principal du prêt', 'Principal do empréstimo', 'Principal del préstamo', 'Тело кредита', 'مبلغ القرض'],
+  derivedFacility: ['融资总额', 'Facility amount', 'Montant de la facilité', 'Valor da facilidade', 'Monto de la facilidad', 'Сумма финансирования', 'إجمالي التسهيل'],
+  derivedFinPrem: ['其中融资保费', 'of which financed premium', 'dont prime financée', 'do qual prêmio financiado', 'del cual prima financiada', 'из них финансированная премия', 'منها قسط ممول'],
+  kFacility: ['融资总额', 'Facility amount', 'Montant de la facilité', 'Valor da facilidade', 'Monto de la facilidad', 'Сумма финансирования', 'إجمالي التسهيل'],
+  kPremium: ['ECA 保费', 'ECA premium', 'Prime ECA', 'Prêmio ECA', 'Prima ECA', 'Премия ECA', 'قسط ECA'],
+  kInsured: ['保险金额（本+息）', 'Insured amount (Principal + Interest)', 'Montant assuré (Principal + Intérêts)', 'Valor segurado (P+J)', 'Monto asegurado (P+I)', 'Страховая сумма (Д+П)', 'مبلغ التأمين (أصل+فائدة)'],
+  kInterest: ['利息合计', 'Total interest', 'Total des intérêts', 'Total de juros', 'Total de intereses', 'Всего процентов', 'إجمالي الفوائد'],
+  kPI: ['本息合计', 'Total principal + interest', 'Total principal + intérêts', 'Total principal + juros', 'Total principal + intereses', 'Всего долг + проценты', 'إجمالي الأصل والفائدة'],
+  kPRate: ['P 基础费率', 'Premium rate (P basis)', 'Taux de prime (base P)', 'Taxa (base P)', 'Tasa (base P)', 'Ставка (база P)', 'المعدل على أساس الأصل'],
+  kWAL: ['加权平均期限', 'Weighted average life', 'Durée moyenne pondérée', 'Prazo médio ponderado', 'Vida media ponderada', 'Средневзвешенный срок', 'متوسط العمر المرجح'],
+  short3xIns: ['3 倍保险金额 × 赔比', '3 × insured amount × cover ratio', '3 × montant assuré × taux', '3 × valor segurado × proporção', '3 × monto asegurado × proporción', '3× страховая сумма × доля возмещения', '3 أضعاف مبلغ التأمين × نسبة التعويض'],
+  kEquity3: ['3 倍权益基数', '3x equity base', 'Base de fonds propres 3x', 'Base de capital 3×', 'Base de capital 3×', '3× база капитала', '3 أضعاف قاعدة الملكية'],
+  kAllIn: ['名义利率（基准 + 利差）', 'Nominal rate (base + margin)', 'Taux nominal (base + marge)', 'Taxa nominal (base + spread)', 'Tipo nominal (base + margen)', 'Номинальная ставка (база + маржа)', 'السعر الاسمي (مرجعي + هامش)'],
+  kAllInShort: ['名义年利率', 'Nominal annual rate', 'Taux annuel nominal', 'Taxa anual nominal', 'Tasa anual nominal', 'Номинальная годовая ставка', 'السعر السنوي الاسمي'],
+  kInterestRatio: ['累计利息 / 本金', 'Total interest / principal', 'Intérêts totaux / principal', 'Juros totais / principal', 'Intereses totales / principal', 'Всего процентов / долг', 'إجمالي الفوائد / الأصل'],
+  kPeriods: ['期数', 'Periods', 'Échéances', 'Períodos', 'Períodos', 'Периодов', 'عدد الفترات'],
+  kFirst: ['首期还款', 'First payment', 'Première échéance', 'Primeiro pagamento', 'Primer pago', 'Первый платёж', 'الدفعة الأولى'],
+  kLast: ['末期还款', 'Final payment', 'Dernière échéance', 'Último pagamento', 'Último pago', 'Последний платёж', 'الدفعة الأخيرة'],
+  kMonths: ['期限（月）', 'Tenor (months)', 'Durée (mois)', 'Prazo (meses)', 'Plazo (meses)', 'Срок (мес.)', 'المدة (شهور)'],
+  secIRR: ['全口径成本（IRR）', 'All-in cost (IRR)', 'Coût global (IRR)', 'Custo total (TIR)', 'Coste total (TIR)', 'Полная стоимость (IRR)', 'التكلفة الشاملة (IRR)'],
+  kIRRAll: ['全口径 IRR', 'All-in IRR', 'IRR global', 'TIR total', 'TIR total', 'Полный IRR', 'IRR شامل'],
+  kIRRExcl: ['不含保费 IRR', 'IRR excl. premium', 'IRR hors prime', 'TIR sem prêmio', 'TIR sin prima', 'IRR без премии', 'IRR بدون قسط'],
+  kIRRSpread: ['保费平摊后 IRR（对比）', 'IRR if premium is paid in installments (comparison)', 'IRR prime lissée (comparatif)', 'TIR com prêmio parcelado', 'TIR con prima fraccionada', 'IRR при рассрочке премии', 'IRR بتقسيط القسط'],
+  kIRRUpBp: ['一次性付保费', 'Upfront premium', 'Prime comptant', 'Prêmio à vista', 'Prima al contado', 'Премия единовременно', 'قسط يُدفع مقدماً'],
+  kIRRSpBp: ['保费平摊（对比）', 'Premium spread (comparison)', 'Prime lissée (comparatif)', 'Prêmio parcelado', 'Prima fraccionada', 'Рассрочка премии', 'القسط المقسم'],
+  kIRRSpreadNote: ['ECA 保费须在放款前一次性付清，实际成本以全口径 IRR 为准；平摊情景仅作对比参考。', 'ECA premium is paid upfront before drawdown; the all-in IRR is the actual cost. The spread case is a comparison only.', 'La prime ECA est réglée avant le tirage ; seul l’IRR global reflète le coût réel. Le cas lissé est une comparaison.'],
+  irrNote: ['现金流：放款为正，还本付息与保费为负，按实际天数年化（XIRR）。', 'Cash flows: drawdowns positive; debt service and premium negative; annualized on actual days (XIRR).', 'Flux : tirages positifs ; service de la dette et prime négatifs ; annualisé en jours réels (XIRR).', 'Fluxos: saques positivos; serviço da dívida e prêmio negativos; anualizado em dias reais (XIRR).', 'Flujos: disposiciones positivas; deuda y prima negativos; anualizado por días reales (XIRR).', 'Денежные потоки: выборки положительны; обслуживание долга и премия отрицательны; годовых по факту (XIRR).', 'التدفقات: السحب موجب؛ خدمة الدين والقسط سالب؛ يُسنَد بالأيام الفعلية (XIRR).'],
+  tailNote: ['* 最后一笔为尾差轧差调整，用于结清剩余本金与当期利息。', '* The final installment true-ups the remaining principal and accrued interest.', '* La dernière échéance régularise le capital restant et les intérêts courus.', '* A última prestação regulariza o principal remanescente e os juros acumulados.', '* La última cuota regulariza el capital pendiente y los intereses devengados.', '* Последний платёж гасит остаток основного долга и начисленные проценты.', '* الدفعة الأخيرة تسوي رصيد الأصل المتبقي والفوائد المستحقة.'],
+  edHint: ['权益 : 债务（船东自有资金占比）', 'Equity : Debt (owner equity share)', 'Fonds propres : dette', 'Capital : Dívida (parte própria)', 'Capital : Deuda (capital propio)', 'Капитал : Долг (доля собственника)', 'حقوق الملكية : الدين (حصة المالك)'],
+  thPeriod: ['期次', 'No.', 'N°', 'N.º', 'N.º', '№', 'م'],
+  thDate: ['还款日', 'Payment date', 'Date d’échéance', 'Data de vencimento', 'Fecha de pago', 'Дата платежа', 'تاريخ السداد'],
+  thDays: ['天数', 'Days', 'Jours', 'Dias', 'Días', 'Дней', 'الأيام'],
+  thOpening: ['期初余额', 'Opening balance', 'Solde initial', 'Saldo inicial', 'Saldo inicial', 'Входящий остаток', 'الرصيد الافتتاحي'],
+  thDrawdown: ['放款额', 'Drawdown', 'Tirage', 'Saque', 'Disposición', 'Выборка', 'السحب'],
+  thPrincipal: ['本金', 'Principal', 'Principal', 'Principal', 'Principal', 'Основной долг', 'الأصل'],
+  thClosing: ['期末余额', 'Closing balance', 'Solde final', 'Saldo final', 'Saldo final', 'Исходящий остаток', 'الرصيد الختامي'],
+  thBaseInt: ['基准利息', 'Base interest', 'Intérêts de base', 'Juros base', 'Intereses base', 'Проценты по базовой ставке', 'فائدة السعر المرجعي'],
+  thMarginInt: ['利差利息', 'Margin interest', 'Intérêts de marge', 'Juros do spread', 'Intereses del margen', 'Проценты по марже', 'فائدة الهامش'],
+  thInterest: ['利息合计', 'Total interest', 'Intérêts totaux', 'Total de juros', 'Total de intereses', 'Всего процентов', 'إجمالي الفائدة'],
+  thTotal: ['本息合计', 'Total payment', 'Échéance totale', 'Pagamento total', 'Pago total', 'Платёж всего', 'إجمالي الدفعة'],
+  totalRow: ['合计', 'Total', 'Total', 'Total', 'Total', 'Итого', 'الإجمالي'],
+  tagDrawdown: ['宽限期', 'Grace period', 'Période de grâce', 'Carência', 'Carencia', 'Льготный период', 'فترة السماح'],
+  currencyTag: ['币种', 'Currency', 'Devise', 'Moeda', 'Moneda', 'Валюта', 'العملة'],
   chTitle: ['每期本金、利息与期末余额', 'Principal, interest and closing balance by period', 'Principal, intérêts et solde final par échéance'],
-  chPrincipal: ['本金', 'Principal', 'Principal'],
-  chInterest: ['利息', 'Interest', 'Intérêts'],
-  chBalance: ['期末余额', 'Closing balance', 'Solde final'],
-  chPeriod: ['期次', 'Period', 'Échéance'],
-
-  sensHead: ['基准利率', 'Base rate', 'Taux de référence'],
-  sensAllIn: ['综合利率', 'All-in', 'Taux global'],
-  sensInterest: ['利息合计', 'Total interest', 'Intérêts'],
-  sensPI: ['本息合计', 'Total P&I', 'Total P+I'],
-  sensPremium: ['保费', 'Premium', 'Prime'],
-  sensInsured: ['保险金额', 'Insured', 'Assuré'],
-  sensPRate: ['P 基础费率', 'P-basis rate', 'Taux base P'],
-  sensNote: ['其他参数保持不变，仅移动基准利率。', 'All other inputs held constant; only the base rate is shifted.', 'Autres paramètres constants ; seul le taux de référence varie.'],
-
+  chPrincipal: ['本金', 'Principal', 'Principal', 'Principal', 'Principal', 'Основной долг', 'الأصل'],
+  chInterest: ['利息', 'Interest', 'Intérêts', 'Juros', 'Intereses', 'Проценты', 'فائدة'],
+  chBalance: ['期末余额', 'Closing balance', 'Solde final', 'Saldo final', 'Saldo final', 'Остаток', 'الرصيد'],
+  chPeriod: ['期次', 'Period', 'Échéance', 'Período', 'Período', 'Период', 'الفترة'],
+  sensHead: ['基准利率', 'Base rate', 'Taux de référence', 'Taxa referencial', 'Tipo de referencia', 'Базовая ставка', 'السعر المرجعي'],
+  sensAllIn: ['综合利率', 'All-in', 'Taux global', 'Taxa global', 'Tipo global', 'Полная ставка', 'السعر الشامل'],
+  sensInterest: ['利息合计', 'Total interest', 'Intérêts', 'Juros', 'Intereses', 'Проценты', 'الفوائد'],
+  sensPI: ['本息合计', 'Total P&I', 'Total P+I', 'Total P+J', 'Total P+I', 'Долг+проценты', 'أصل+فائدة'],
+  sensPremium: ['保费', 'Premium', 'Prime', 'Prêmio', 'Prima', 'Премия', 'القسط'],
+  sensInsured: ['保险金额', 'Insured', 'Assuré', 'Segurado', 'Asegurado', 'Страховая сумма', 'مبلغ التأمين'],
+  sensPRate: ['P 基础费率', 'P-basis rate', 'Taux base P', 'Taxa base P', 'Tasa base P', 'Ставка базы P', 'معدل أساس الأصل'],
+  sensNote: ['其他参数保持不变，仅移动基准利率。', 'All other inputs held constant; only the base rate is shifted.', 'Autres paramètres constants ; seul le taux de référence varie.', 'Demais parâmetros constantes; apenas a taxa referencial varia.', 'Resto de parámetros constantes; solo varía el tipo de referencia.', 'Прочие параметры неизменны; меняется только базовая ставка.', 'بقاء باقي المعاملات ثابتة؛ يتغير السعر المرجعي فقط.'],
   noteTitle: ['口径与校验', 'Conventions and checks', 'Conventions et contrôles'],
-  note1: ['计息：利息 = 期初余额（含本期提款）× 利率 × 实际天数 / 计息基数；还款日按起算日逐期递推至月末（EOMONTH）。', 'Interest = balance (incl. current drawdown) × rate × actual days / basis. Payment dates roll forward to month-end (EOMONTH).', 'Intérêts = solde (tirage inclus) × taux × jours réels / base. Les dates d’échéance sont calées en fin de mois (EOMONTH).'],
-  note2: ['本金：还款期内等额摊还，末期轧差清零；提款期内只付息、不还本。', 'Principal: equal instalments during the repayment period, final period true-up; interest only during drawdown.', 'Principal : amortissement constant, ajustement final ; intérêts seuls pendant le tirage.'],
+  note1: ['计息：利息 = 期初余额（含本期放款）× 利率 × 实际天数 / 计息基数；还款日按起算日逐期递推至月末（EOMONTH）。', 'Interest = balance (incl. current drawdown) × rate × actual days / basis. Payment dates roll forward to month-end (EOMONTH).', 'Intérêts = solde (tirage inclus) × taux × jours réels / base. Les dates d’échéance sont calées en fin de mois (EOMONTH).'],
+  note2: ['本金：还款期内等额摊还，末期轧差清零；宽限期内只付息、不还本。', 'Principal: equal instalments during the repayment period, final period true-up; interest only during the grace period.', 'Principal : amortissement constant, ajustement final ; intérêts seuls pendant la période de grâce.'],
   note3: ['保费：默认按本+息 × 费率，保险金额 = 融资总额 + 全部利息；若保费融资，融资总额含保费，由迭代求解，避免循环引用。', 'Premium defaults to (Principal + Interest) × rate; insured amount = facility + total interest. If premium is financed, the facility includes it and is solved iteratively to avoid circular references.', 'Prime = (Principal + Intérêts) × taux par défaut ; montant assuré = facilité + intérêts. Si la prime est financée, elle entre dans la facilité, résolue par itération.'],
-  note4: ['与附件一致的基准情形：合同价 9,200 万、Equity:Debt 30:70、SOFR 3.67%、利差 1.80%、保费 5.5%、10 年半年期 → 利息 18,771,481.05、本息 83,171,481.05、保费 4,574,431.46、P 基础费率 7.1032%。', 'Baseline reproducing the source file: price 92.0M, Equity:Debt 30:70, SOFR 3.67%, margin 1.80%, premium 5.5%, 10 years semi-annual → interest 18,771,481.05, P&I 83,171,481.05, premium 4,574,431.46, P-basis rate 7.1032%.', 'Référence reproduisant le fichier source : prix 92,0 M, Equity:Debt 30:70, SOFR 3,67 %, marge 1,80 %, prime 5,5 %, 10 ans semestriel → intérêts 18 771 481,05, P+I 83 171 481,05, prime 4 574 431,46, taux base P 7,1032 %.'],
+  note4: ['基准情形：合同价 1 亿美元（10,000 万）、Equity:Debt 30:70、SOFR 3.67%、利差 1.80%、ECA 费率 5.36%、保费融资比例 0（保费放款前全额自付）、10 年半年期 → 利息 20,403,783.75、本息 90,403,783.75、保费 4,845,642.81、P 基础费率 6.9223%。', 'Baseline: price 100.0M USD, Equity:Debt 30:70, SOFR 3.67%, margin 1.80%, ECA premium 5.36%, premium financing 0 (premium paid upfront), 10 years semi-annual → interest 20,403,783.75, P&I 90,403,783.75, premium 4,845,642.81, P-basis rate 6.9223%.', 'Référence : prix 100,0 M USD, Equity:Debt 30:70, SOFR 3,67 %, marge 1,80 %, prime ECA 5,36 %, part financée 0 (prime payée d\u2019avance), 10 ans semestriel → intérêts 20 403 783,75, P+I 90 403 783,75, prime 4 845 642,81, taux base P 6,9223 %.'],
   note6: ['基准利率可由纽约联储公开接口实时获取（点击“刷新 SOFR”）；模型按固定基准利率测算全期，浮动利率情景需另行分析。', 'The base rate can be refreshed from the NY Fed public API; the model applies it as a flat rate for the full tenor, so floating-rate scenarios need separate analysis.', 'Le taux de référence peut être actualisé via l’API publique de la NY Fed ; le modèle l’applique comme taux fixe sur toute la durée.'],
   note5: ['本工具仅用于内部测算与方案比较，不构成报价、承保或融资承诺。', 'For internal estimation and comparison only; not a quotation, an underwriting or a financing commitment.', 'Outil interne d’estimation et de comparaison ; ne constitue pas une offre, un engagement d’assurance ou de financement.'],
-  parityOk: ['与附件基准一致', 'Matches source file', 'Conforme au fichier source'],
-  parityDiff: ['与附件基准存在差异', 'Differs from source baseline', 'Écart vs fichier source'],
-
+  parityOk: ['与样本基准一致', 'Matches sample baseline', 'Conforme au modèle', 'Conforme à amostra', 'Coincide con la muestra', 'Совпадает с базой', 'مطابق للمرجع'],
+  parityDiff: ['与样本基准存在差异', 'Differs from sample baseline', 'Écart vs modèle', 'Difere da amostra', 'Difiere de la muestra', 'Отличие от базы', 'يختلف عن المرجع'],
   vLtv: ['LTV 应大于 0 且不超过 100%。', 'LTV must be above 0 and no more than 100%.', 'La quotité doit être > 0 et ≤ 100 %.'],
   vPrice: ['合同价格需为正数。', 'Contract price must be positive.', 'Le prix du contrat doit être positif.'],
   vRepay: ['还款期至少 12 个月。', 'Repayment period must be at least 12 months.', 'La période d’amortissement doit être d’au moins 12 mois.'],
-  vPrem: ['信保费率应大于 0。', 'Premium rate must be greater than 0.', 'Le taux de prime doit être positif.'],
+  vPrem: ['ECA 保费费率应不小于 0。', 'Premium rate must be ≥ 0.', 'Le taux de prime doit être ≥ 0.'],
   vRate: ['利率不能为负。', 'Rates cannot be negative.', 'Les taux ne peuvent pas être négatifs.'],
   vDate: ['请填写有效的起算日。', 'Enter a valid commencement date.', 'Saisissez une date d’effet valide.'],
-  vDrawdown: ['提款期不能超过总期限。', 'Drawdown period cannot exceed the total tenor.', 'La période de tirage ne peut excéder la durée totale.'],
-
-  footer: ['Sinosure P&I estimation tool · single-file HTML', 'Sinosure P&I estimation tool · single-file HTML', 'Outil d’estimation P&I Sinosure · HTML autonome'],
-  baseCase: ['附件基准情形', 'Source baseline', 'Cas de référence'],
-  readme: ['调节左侧参数，右侧结果与还款计划实时重算。', 'Adjust the inputs on the left; results and schedule recalculate live.', 'Ajustez les paramètres à gauche ; les résultats se recalculent en direct.'],
+  vDrawdown: ['宽限期不能超过总期限。', 'Grace period cannot exceed the total tenor.', 'La période de grâce ne peut excéder la durée totale.'],
+  footer: ['ECA P&I estimation tool · single-file HTML', 'ECA P&I estimation tool · single-file HTML', 'Outil d’estimation P&I ECA · HTML autonome', 'Ferramenta de estimativa P&I ECA · HTML autônomo', 'Herramienta de estimación P&I ECA · HTML autónomo', 'Инструмент расчёта P&I ECA · автономный HTML', 'أداة تقدير P&I ECA · ملف HTML مستقل'],
+  baseCase: ['样本基准情形', 'Sample baseline', 'Cas de référence', 'Caso de referência', 'Caso de referencia', 'Базовый сценарий', 'الحالة المرجعية'],
+  readme: ['调节左侧参数，右侧结果与还款计划实时重算。', 'Adjust the inputs on the left; results and schedule recalculate live.', 'Ajustez les paramètres à gauche ; les résultats se recalculent en direct.', 'Ajuste os parâmetros à esquerda; os resultados recalculam em tempo real.', 'Ajuste los parámetros a la izquierda; los resultados se recalculan en vivo.', 'Меняйте параметры слева; результаты пересчитываются в реальном времени.', 'اضبط المعاملات يميناً؛ تُعاد الحسابات تلقائياً.'],
   sheetInputs: ['参数', 'Inputs', 'Paramètres'],
   sheetDerived: ['推算结果', 'Derived', 'Résultats dérivés'],
   sheetSummary: ['核心结果', 'Summary', 'Synthèse'],
@@ -728,34 +843,54 @@ var DICT = {
   colValue: ['数值', 'Value', 'Valeur'],
   colRate: ['利率变动', 'Rate shift', 'Variation de taux'],
   noteExcel: ['说明：保费为迭代求解的静态值；其余单元格保留公式，修改参数后自动重算。', 'Note: premium is a solved static value; other cells keep live formulas.', 'Note : la prime est une valeur résolue ; les autres cellules restent des formules.'],
-  srcFile: ['来源：Copy Sinosure P_I estimation v1.xlsx', 'Source: Copy Sinosure P_I estimation v1.xlsx', 'Source : Copy Sinosure P_I estimation v1.xlsx'],
-
-  liveBtn: ['刷新 SOFR', 'Refresh SOFR', 'Actualiser SOFR'],
-  liveOk: ['实时', 'Live', 'Temps réel'],
-  liveManual: ['手动输入', 'Manual input', 'Saisie manuelle'],
-  liveFail: ['取数失败 · 沿用当前值', 'Fetch failed · current value kept', 'Échec · valeur actuelle conservée'],
-  liveIdle: ['按当前 SOFR 作为固定基准利率', 'Current SOFR as a flat base rate', 'SOFR actuel appliqué comme taux fixe'],
-  liveLoading: ['正在获取…', 'Fetching…', 'Récupération…'],
-  liveRefresh: ['刷新', 'Refresh', 'Actualiser'],
-  liveLookup: ['查询', 'Look up', 'Consulter'],
-  liveRef: ['官方参考', 'Official reference', 'Référence officielle'],
-  fxManual: ['手动汇率', 'Manual rates', 'Taux manuels'],
-  fxReset: ['恢复实时汇率', 'Restore live rates', 'Rétablir les taux réels'],
-  fxEditHint: ['点击数字可手动调整，用于锁汇或报价场景。', 'Click a rate to override it (for hedging or quoting).', 'Cliquez sur un taux pour le modifier (couverture ou cotation).'],
-  fxEquiv: ['融资总额折合', 'Facility in USD', 'Facilité en USD'],
-  fxLive: ['实时汇率', 'Live FX', 'Taux en direct'],
-  fxIdle: ['汇率未更新', 'FX not updated', 'Taux non actualisé'],
-  liveApplied: ['已应用', 'applied', 'appliqué']
-
+  srcFile: ['来源：ECA P_I estimation v1.xlsx', 'Source: ECA P_I estimation v1.xlsx', 'Source : ECA P_I estimation v1.xlsx'],
+  liveBtn: ['刷新 SOFR', 'Refresh SOFR', 'Actualiser SOFR', 'Atualizar SOFR', 'Actualizar SOFR', 'Обновить SOFR', 'تحديث SOFR'],
+  liveOk: ['实时', 'Live', 'Temps réel', 'Tempo real', 'En directo', 'В реальном времени', 'مباشر'],
+  liveManual: ['手动输入', 'Manual input', 'Saisie manuelle', 'Entrada manual', 'Entrada manual', 'Ручной ввод', 'إدخال يدوي'],
+  liveFail: ['取数失败 · 沿用当前值', 'Fetch failed · current value kept', 'Échec · valeur actuelle conservée', 'Falha · valor atual conservado', 'Error · valor actual conservado', 'Сбой · текущее значение сохранено', 'فشل · يُحتفظ بالقيمة الحالية'],
+  liveIdle: ['按当前 SOFR 作为固定基准利率', 'Current SOFR as a flat base rate', 'SOFR actuel appliqué comme taux fixe', 'SOFR atual como taxa fixa', 'SOFR actual como tipo fijo', 'Текущий SOFR как фиксированная ставка', 'SOFR الحالي كسعر ثابت'],
+  liveLoading: ['正在获取…', 'Fetching…', 'Récupération…', 'Buscando…', 'Consultando…', 'Загрузка…', 'جارٍ الجلب…'],
+  liveRefresh: ['刷新', 'Refresh', 'Actualiser', 'Atualizar', 'Actualizar', 'Обновить', 'تحديث'],
+  liveLookup: ['查询', 'Look up', 'Consulter', 'Consultar', 'Consultar', 'Смотреть', 'مراجعة'],
+  liveRef: ['官方参考', 'Official reference', 'Référence officielle', 'Referência oficial', 'Referencia oficial', 'Официальный источник', 'مرجع رسمي'],
+  fxManual: ['手动汇率', 'Manual rates', 'Taux manuels', 'Taxas manuais', 'Tipos manuales', 'Ручные курсы', 'أسعار يدوية'],
+  fxReset: ['恢复实时汇率', 'Restore live rates', 'Rétablir les taux réels', 'Restaurar taxas reais', 'Restablecer tipos reales', 'Восстановить рыночные курсы', 'استعادة الأسعار المباشرة'],
+  fxEditHint: ['点击数字可手动调整，用于锁汇或报价场景。', 'Click a rate to override it (for hedging or quoting).', 'Cliquez sur un taux pour le modifier (couverture ou cotation).', 'Clique para ajustar a taxa (hedge ou cotação).', 'Haga clic para ajustar el tipo (cobertura o cotización).', 'Нажмите, чтобы изменить курс (хеджирование или котировка).', 'انقر لتعديل السعر (للتحوط أو التسعير).'],
+  fxEquiv: ['融资总额折合', 'Facility in USD', 'Facilité en USD', 'Facilidade em USD', 'Facilidad en USD', 'Финансирование в USD', 'التسهيل بالدولار'],
+  fxLive: ['实时汇率', 'Live FX', 'Taux en direct', 'Taxas em direto', 'Tipos en directo', 'Рыночные курсы', 'أسعار مباشرة'],
+  fxIdle: ['汇率未更新', 'FX not updated', 'Taux non actualisé', 'FX não atualizado', 'FX no actualizado', 'Курсы не обновлены', 'الصرف غير محدّث'],
+  liveApplied: ['已应用', 'applied', 'appliqué'],
+  fxHedgeTitle: ['人民币远期锁汇成本', 'CNY forward hedging cost', 'Coût de couverture à terme (CNY)', 'Custo de hedge cambial (CNY)', 'Coste de cobertura cambiaria (CNY)', 'Стоимость хеджирования CNY', 'تكلفة تحويل العملة (يوان)'],
+  fxHedgeSpot: ['即期买入价 (USD/CNY)', 'Spot buy rate (USD/CNY)', 'Taux achat comptant (USD/CNY)', 'Compra à vista (USD/CNY)', 'Compra al contado (USD/CNY)', 'Спот покупка (USD/CNY)', 'سعر الشراء الفوري (USD/CNY)'],
+  fxHedgeFwd: ['对应期限远期买入价', 'Forward buy rate', 'Taux achat à terme', 'Compra a futuro', 'Compra a plazo', 'Форвардная покупка', 'سعر الشراء الآجل'],
+  fxHedgeTenor: ['账期对应远期档位', 'Forward tenor matched to credit period', 'Échéance à terme correspondante', 'Prazo correspondente à dívida', 'Plazo correspondiente', 'Срок по сроку долга', 'المدة المقابلة للدين'],
+  fxHedgeCost: ['远期锁汇成本', 'Forward hedge cost', 'Coût de couverture à terme', 'Custo de hedge a futuro', 'Coste de cobertura a plazo', 'Стоимость форвардного хеджа', 'تكلفة التحوط الآجل'],
+  fxHedgeEquivUSD: ['折合美元', 'Equivalent USD', 'Équivalent USD', 'Equivalente em USD', 'Equivalente en USD', 'Эквивалент в USD', 'المعادل بالدولار'],
+  fxHedgeRatio: ['占融资总额', 'Share of facility', 'Part de la facilité', '% da facilidade', '% de la facilidad', '% от финансирования', '% من التسهيل'],
+  fxHedgeMsgFill: ['即期、远期两项填好后自动折算。', 'Fill spot and forward to auto-calculate.', 'Remplir comptant et à terme pour le calcul.', 'Preencha à vista e a futuro para calcular.', 'Complete contado y plazo para el cálculo.', 'Заполните спот и форвард для авторасчёта.', 'أدخل السعر الفوري والآجل ليُحسب تلقائياً.'],
+  fxHedgeMsgDone: ['已按对应期限远期折算。', 'Forward hedge cost applied.', 'Coût à terme appliqué.', 'Cálculo pela taxa a futuro.', 'Cálculo con el tipo a plazo.', 'Расчёт по форвардной ставке.', 'تم الحساب حسب السعر الآجل.'],
+  fxHedgeMsgPrem: ['远期升水，锁汇无成本，按 0 计。', 'Forward premium: no hedge cost, counted as 0.', 'Prime à terme : coût nul, compté 0.', 'Prêmio a futuro: sem custo, considerado 0.', 'Prima a plazo: sin coste, se toma 0.', 'Форвардная премия: хедж без затрат, 0.', 'علاوة آجلة: لا تكلفة تحوط، تُحسب 0.'],
+  fxHedgeCap: ['账期超过一年，中行远期最长只报一年，请按一年期买入价填。', 'Period over one year; BOC forwards quote up to 1Y, use the 1Y buy rate.', 'Durée > 1 an : le marché à terme plafonne à 1 an.', 'Prazo superior a um ano: use a compra a 1 ano.', 'Plazo superior a un año: use la compra a 1 año.', 'Срок более года: используйте ставку 1 года.', 'المدة أطول من سنة: استخدم سعر سنة واحدة.'],
+  fxHedgeFormula: ['口径：锁汇成本 = max(0, (即期 − 远期)) × 美元金额；远期升水按 0 计。牌价按元/100 美元填 665.44 或 6.6544 均可，自动换算。', 'Cost = max(0, (spot − forward)) × USD amount; forward premium counted 0. Quote per 100 USD: 665.44 or 6.6544, both auto-converted.', 'Coût = max(0, (comptant − à terme)) × montant USD ; prime à terme à 0. Cotation par 100 USD : 665,44 ou 6,6544.', 'Custo = máx(0, (vista − futuro)) × montante USD; 665,44 ou 6,6544 convertidos.', 'Coste = máx(0, (contado − plazo)) × importe USD; 665,44 ó 6,6544.', 'Затраты = макс(0, (спот − форвард)) × сумма USD; 665,44 или 6,6544.', 'التكلفة = أقصى(0، (الفوري − الآجل)) × المبلغ بالدولار؛ 665.44 أو 6.6544.'],
+  fxHedgeLinks: ['中国银行牌价查询', 'BOC quote lookup', 'Cotations BOC', 'Cotações Banco da China', 'Cotaciones Banco de China', 'Котировки Bank of China', 'أسعار بنك الصين'],
+  fxFwdLinkShort: ['远期外汇牌价', 'Forward quotes', 'Cours à terme', 'Cotação a futuro', 'Cotización a plazo', 'Форвардные котировки', 'الأسعار الآجلة'],
+  fxHedgeNote: ['⚠️ 锁汇成本随市场实时波动，测算前请先查询最新远期牌价。', '⚠️ Hedge cost fluctuates live; check the latest forward quotes first.', '⚠️ Le coût de couverture fluctue en direct ; vérifiez les cotations à terme.', '⚠️ O custo do hedge flutua; consulte a cotação a futuro recente.', '⚠️ El coste fluctúa; consulte la última cotización a plazo.', '⚠️ Стоимость хеджа меняется; проверьте форвард.', '⚠️ تتقلب التكلفة؛ راجع أحدث سعر آجل.'],
+  fxHedgeInIRR: ['含锁汇成本 IRR', 'IRR incl. hedge cost', 'IRR coût de couverture inclus', 'TIR incluindo hedge', 'TIR incluyendo cobertura', 'IRR с учётом хеджа', 'IRR شامل تكلفة التحوط'],
+  tenorWeek: ['一周', '1 week', '1 semaine', 'Uma semana', 'Una semana', '1 неделя', 'أسبوع'],
+  tenorMonth: ['个月', 'months', 'mois', 'meses', 'meses', 'мес.', 'شهور'],
+  tenorYear: ['一年', '1 year', '1 an', 'Um ano', 'Un año', '1 год', 'سنة'],
 };
 
-var LANG_IDX = { zh: 0, en: 1, fr: 2 };
+var LANG_IDX = { zh: 0, en: 1, fr: 2, pt: 3, es: 4, ru: 5, ar: 6 };
 
 function txt(key, lang) {
   var arr = DICT[key];
   if (!arr) return key;
   var i = LANG_IDX[lang];
-  return arr[i === undefined ? 1 : i];
+  if (i === undefined) i = 1;
+  var v = arr[i];
+  if (v === undefined || v === null || v === '') v = (arr[1] !== undefined ? arr[1] : arr[0]);
+  return v;
 }
 
 /* ============================ date helpers ============================ */
@@ -781,7 +916,7 @@ function excelSerial(iso) {
 
 /* ============================ model ============================ */
 var DEFAULTS = {
-  price: 92000000,
+  price: 100000000,
   start: '2026-06-30',
   debtShare: 0.70,
   baseRate: 0.0367,
@@ -792,44 +927,118 @@ var DEFAULTS = {
   repayType: 'equal',
   balloonShare: 1,
   freq: 2,
-  premRate: 0.055,
+  insured: true,
+  premRate: 0.0536,
   premBasis: 'PI',
-  premFinanceRatio: 0.85,
-  finIDC: 0,
+  premFinanceRatio: 0,
+  compRatio: 0.95,
+  idcCap: false,
+  drawStepMonths: 3,
   currency: 'USD'
 };
 
 var BASE_CASE = {
-  interest: 18771481.05,
-  pi: 83171481.05,
-  premium: 4574431.45775,
-  facility: 64399999.99999999
+  interest: 20403783.75,
+  pi: 90403783.75,
+  premium: 4845642.81,
+  facility: 70000000.00
 };
 
 function buildSchedule(facility, inp) {
   var freq = inp.freq;
   var months = 12 / freq;
+  var ddM = inp.ddMonths !== undefined ? inp.ddMonths : inp.ddYears * 12;
   var nPay = Math.max(1, Math.round(inp.repYears * freq));
-  var nGrace = Math.max(0, Math.round(inp.ddYears * freq));
-  var nTranche = nGrace > 0 ? nGrace : 1;
-  var total = nGrace + nPay;
+  var capIDC = inp.idcCap === true;
+  var step = Math.max(1, Math.min(6, inp.drawStepMonths || 3));
+  var graceM = Math.max(0, Math.round(ddM / months)) * months;
+
+  /* Construction phase: rows follow the repayment (payment) frequency; each row
+     keeps a monthly breakdown in r.detail for drill-down. */
+  var offs = [];
+  if (graceM > 0) {
+    for (var o2 = months; o2 < graceM - 1e-9; o2 += months) offs.push(o2);
+    offs.push(graceM);
+  }
+  var nConst = offs.length;
+  var total = nConst + nPay;
+  var nTr = graceM > 0 ? Math.max(1, Math.ceil(graceM / step - 1e-9)) : 1;
+  var perTr = facility / nTr;
+  var tranches = [];
+  if (graceM > 0) {
+    for (var ti = 0; ti < nTr; ti++) {
+      tranches.push({ m: ti * step, amt: ti === nTr - 1 ? facility - perTr * (nTr - 1) : perTr });
+    }
+  }
+  var allIn = inp.baseRate + inp.margin;
+
+  function monthlySub(startOff, endOff, opening) {
+    var sub = [], balSub = opening, m = startOff, rowDraw = 0;
+    while (m < endOff - 1e-9) {
+      var mEnd = Math.min(m + 1, endOff);
+      var d0 = eomAdd(inp.start, m), d1 = eomAdd(inp.start, mEnd);
+      var dDays = daysBetween(d0, d1);
+      var tAmt = 0;
+      tranches.forEach(function (t) { if (Math.abs(t.m - m) < 1e-9) tAmt = t.amt; });
+      var b = balSub + tAmt;
+      var bInt = b * inp.baseRate * dDays / inp.basis;
+      var mInt = b * inp.margin * dDays / inp.basis;
+      sub.push({ date: isoOf(d1), days: dDays, drawdown: tAmt, opening: balSub, closing: balSub + tAmt, baseInt: bInt, marginInt: mInt, interest: bInt + mInt });
+      balSub += tAmt; rowDraw += tAmt;
+      m = mEnd;
+    }
+    return { sub: sub, draw: rowDraw };
+  }
+
   var rows = [];
   var prevEnd = toDate(inp.start);
-  var bal = 0;
-  var perTranche = facility / nTranche;
+  var bal = 0, repayBal = 0, annPay = 0, amortBase = 0, idc = 0, accInt = 0;
   for (var k = 1; k <= total; k++) {
-    var end = eomAdd(inp.start, k * months);
+    var inGrace = k <= nConst;
+    var startOff = k === 1 ? 0 : (inGrace ? offs[k - 2] : graceM + (k - nConst - 1) * months);
+    var offset = inGrace ? offs[k - 1] : graceM + (k - nConst) * months;
+    var end = eomAdd(inp.start, offset);
     var days = daysBetween(prevEnd, end);
     var opening = bal;
-    var drawdown = 0;
-    if (k <= nTranche) drawdown = (k === nTranche) ? facility - perTranche * (nTranche - 1) : perTranche;
-    var balShare = inp.repayType === 'balloon' ? Math.max(0, Math.min(1, inp.balloonShare === undefined ? 1 : inp.balloonShare)) : 0;
-    var amortBase = facility * (1 - balShare);
-    var principal = (k > nGrace) ? (inp.repayType === 'balloon' ? amortBase / nPay : facility / nPay) : 0;
-    if (k === total) principal = opening + drawdown;
-    var baseInt = (opening + drawdown) * inp.baseRate * days / inp.basis;
-    var marginInt = (opening + drawdown) * inp.margin * days / inp.basis;
-    var closing = opening + drawdown - principal;
+    var drawdown = 0, detail = null, baseInt = 0, marginInt = 0, interest = 0;
+    if (inGrace) {
+      var ms = monthlySub(startOff, offset, opening);
+      drawdown = ms.draw;
+      detail = ms.sub;
+      ms.sub.forEach(function (r) { baseInt += r.baseInt; marginInt += r.marginInt; interest += r.interest; });
+    } else if (nConst === 0 && k === 1) {
+      drawdown = facility;
+    }
+    var prePrincipal = opening + drawdown;
+    if (!inGrace) {
+      baseInt = prePrincipal * inp.baseRate * days / inp.basis;
+      marginInt = prePrincipal * inp.margin * days / inp.basis;
+      interest = baseInt + marginInt;
+    }
+
+    var principal = 0, capped = false, closing = prePrincipal, paid = interest, settle = 0, accrue = false;
+    if (inGrace) {
+      settle = interest + accInt;
+      accInt = 0;
+      if (capIDC && settle > 0) { capped = true; idc += settle; paid = 0; closing = prePrincipal + settle; }
+      else { paid = settle; closing = prePrincipal; }
+    } else {
+      if (k === nConst + 1) {
+        repayBal = prePrincipal;
+        if (inp.repayType === 'annuity') {
+          var ip = allIn / freq;
+          annPay = ip > 0 ? repayBal * ip / (1 - Math.pow(1 + ip, -nPay)) : repayBal / nPay;
+        }
+        var balShare0 = Math.max(0, Math.min(1, inp.balloonShare === undefined ? 1 : inp.balloonShare));
+        amortBase = repayBal * (1 - (inp.repayType === 'balloon' ? balShare0 : 0));
+      }
+      if (inp.repayType === 'balloon') principal = amortBase / nPay;
+      else if (inp.repayType === 'annuity') principal = Math.min(prePrincipal, Math.max(0, annPay - interest));
+      else principal = repayBal / nPay;
+      if (k === total) principal = prePrincipal;
+      closing = prePrincipal - principal;
+      paid = principal + interest;
+    }
     if (Math.abs(closing) < 1e-6) closing = 0;
     rows.push({
       period: k,
@@ -837,17 +1046,22 @@ function buildSchedule(facility, inp) {
       days: days,
       opening: opening,
       drawdown: drawdown,
+      draws: drawdown ? [{ date: isoOf(prevEnd), amt: drawdown }] : [],
       principal: principal,
       closing: closing,
       baseInt: baseInt,
       marginInt: marginInt,
-      interest: baseInt + marginInt,
-      total: principal + baseInt + marginInt
+      interest: interest,
+      capped: capped,
+      accrue: accrue,
+      settle: settle,
+      detail: detail,
+      total: paid
     });
     bal = closing;
     prevEnd = end;
   }
-  var tot = { drawdown: 0, principal: 0, baseInt: 0, marginInt: 0, interest: 0, total: 0 };
+  var tot = { drawdown: 0, principal: 0, baseInt: 0, marginInt: 0, interest: 0, total: 0, idc: 0 };
   rows.forEach(function (r) {
     tot.drawdown += r.drawdown;
     tot.principal += r.principal;
@@ -855,8 +1069,9 @@ function buildSchedule(facility, inp) {
     tot.marginInt += r.marginInt;
     tot.interest += r.interest;
     tot.total += r.total;
+    if (r.capped) tot.idc += r.interest;
   });
-  return { rows: rows, totals: tot, nPay: nPay, nGrace: nGrace };
+  return { rows: rows, totals: tot, nPay: nPay, nGrace: nConst, facility: repayBal, idc: idc };
 }
 
 function xirr(flows) {
@@ -906,9 +1121,14 @@ function cashFlows(rows, startIso, prem, nPay, premMode) {
   var prev = startIso;
   for (var i = 0; i < rows.length; i++) {
     var r = rows[i];
-    if (r.drawdown) flows.push({ date: prev, amount: r.drawdown });
+    if (r.draws && r.draws.length) {
+      r.draws.forEach(function (d) { flows.push({ date: d.date, amount: d.amt }); });
+    } else if (r.drawdown) {
+      flows.push({ date: prev, amount: r.drawdown });
+    }
     var amt = -(r.principal + r.interest);
-    if (premMode === 'spread' && r.principal > 0 && nPay > 0) amt -= p / nPay;
+    if (r.capped) amt = 0;
+    if (premMode === 'spread' && r.principal > 0 && nPay > 0) amt = -(r.principal + r.interest) - p / nPay;
     flows.push({ date: r.end, amount: amt });
     prev = r.end;
   }
@@ -920,40 +1140,47 @@ var BASE_LABEL = { USD: 'fBaseSOFR', CNY: 'fBaseLPR', EUR: 'fBaseESTR', GBP: 'fB
 function compute(inp) {
   inp = Object.assign({}, inp);
   if (inp.debtShare === undefined && inp.ltv !== undefined) inp.debtShare = inp.ltv;
+  var cover = inp.insured !== false;
   var premRatio = inp.premFinanceRatio;
   if (premRatio === undefined) premRatio = inp.premFinanced ? 0.85 : 0;
   premRatio = Math.max(0, Math.min(0.85, premRatio || 0));
+  if (!cover) { premRatio = 0; inp.premRate = 0; }
   inp.premFinanceRatio = premRatio;
+  var compRatio = inp.compRatio === undefined ? 0.95 : Math.max(0, Math.min(1, inp.compRatio));
+  inp.compRatio = compRatio;
   var debt = inp.debtShare;
   var loan = inp.price * debt;
-  var prem = 0, facility = 0, sch = null, insured = 0, guard = 0;
-  var maxIter = premRatio > 0 ? 80 : 1;
+  var capIDC = inp.idcCap === true;
+  var prem = 0, facility = 0, sch = null, insured = 0, guard = 0, prevFac = -1;
+  var maxIter = (cover && premRatio > 0) || capIDC ? 160 : 1;
   while (guard++ < maxIter) {
-    facility = loan + prem * premRatio + (inp.finIDC || 0);
-    sch = buildSchedule(facility, inp);
-    insured = facility + sch.totals.interest;
-    var newPrem = inp.premRate * (inp.premBasis === 'PI' ? insured : facility);
-    if (Math.abs(newPrem - prem) < 0.005) { prem = newPrem; break; }
+    sch = buildSchedule(loan + prem * premRatio, inp);
+    facility = sch.facility;
+    insured = facility + sch.totals.interest - sch.idc;
+    var newPrem = cover ? inp.premRate * (inp.premBasis === 'PI' ? insured : facility) : 0;
+    var stable = Math.abs(newPrem - prem) < 0.005 && Math.abs(facility - prevFac) < 0.005;
+    prevFac = facility;
     prem = newPrem;
+    if (stable) break;
   }
-  facility = loan + prem * premRatio + (inp.finIDC || 0);
-  sch = buildSchedule(facility, inp);
-  insured = facility + sch.totals.interest;
+  sch = buildSchedule(loan + prem * premRatio, inp);
+  facility = sch.facility;
+  insured = facility + sch.totals.interest - sch.idc;
 
   var nPayCount = 0;
   sch.rows.forEach(function (r) { if (r.principal > 0) nPayCount++; });
-  /* no-premium counterfactual: same loan + IDC, no insurance premium */
-  var schNone = buildSchedule(loan + (inp.finIDC || 0), inp);
+  /* no-premium counterfactual: same loan, no insurance premium */
+  var schNone = buildSchedule(loan, inp);
   var nPayNone = 0;
   schNone.rows.forEach(function (r) { if (r.principal > 0) nPayNone++; });
-  var fAll = cashFlows(sch.rows, inp.start, prem, nPayCount, 'actual');
+  var fAll = cashFlows(sch.rows, inp.start, prem, nPayCount, cover ? 'actual' : 'none');
   var fNone = cashFlows(schNone.rows, inp.start, prem, nPayNone, 'none');
   var fSpread = cashFlows(schNone.rows, inp.start, prem, nPayNone, 'spread');
   var irrAllIn = xirr(fAll);
   var irrExcl = xirr(fNone);
   var irrSpread = xirr(fSpread);
-  var bpUpfront = (isFinite(irrAllIn) && isFinite(irrExcl)) ? (irrAllIn - irrExcl) * 10000 : NaN;
-  var bpSpread = (isFinite(irrSpread) && isFinite(irrExcl)) ? (irrSpread - irrExcl) * 10000 : NaN;
+  var bpUpfront = (cover && isFinite(irrAllIn) && isFinite(irrExcl)) ? (irrAllIn - irrExcl) * 10000 : NaN;
+  var bpSpread = (cover && isFinite(irrSpread) && isFinite(irrExcl)) ? (irrSpread - irrExcl) * 10000 : NaN;
 
   var startD = toDate(inp.start);
   var wal = 0;
@@ -965,17 +1192,20 @@ function compute(inp) {
   return {
     loan: loan,
     facility: facility,
+    covered: cover,
     premium: prem,
     financedPremium: prem * premRatio,
     premiumPrepay: prem * (1 - premRatio),
     premFinanceRatio: premRatio,
     balloonShare: premRatio >= 0 ? (inp.repayType === 'balloon' ? Math.max(0, Math.min(1, inp.balloonShare === undefined ? 1 : inp.balloonShare)) : 0) : 0,
     insured: insured,
+    idc: sch.idc,
+    idcCap: capIDC,
     interest: sch.totals.interest,
     principal: sch.totals.principal,
-    pi: sch.totals.principal + sch.totals.interest,
+    pi: insured,
     pRate: facility > 0 ? prem / facility : 0,
-    equity3: insured * 3,
+    equity3: cover ? insured * compRatio * 3 : 0,
     wal: wal,
     allIn: inp.baseRate + inp.margin,
     debtShare: debt,
@@ -1011,7 +1241,7 @@ function validate(inp) {
   var ds = inp.debtShare === undefined ? inp.ltv : inp.debtShare;
   if (!(ds > 0) || ds > 1) msgs.push('vLtv');
   if (!(inp.repYears >= 1)) msgs.push('vRepay');
-  if (!(inp.premRate > 0)) msgs.push('vPrem');
+  if (inp.insured !== false && !(inp.premRate >= 0)) msgs.push('vPrem');
   if (inp.baseRate < 0 || inp.margin < 0) msgs.push('vRate');
   if (!/^\d{4}-\d{2}-\d{2}$/.test(inp.start)) msgs.push('vDate');
   if (inp.ddYears > inp.repYears) msgs.push('vDrawdown');
@@ -1232,6 +1462,7 @@ function buildXlsx(model, langs, cur) {
   function moneyLabel(key) { return lab(key) + ' (' + cur + ')'; }
   var inp = model.inp;
   var loc = L[0];
+  var cover = model.covered !== false;
 
   /* ---------- Assumptions ---------- */
   var a = [];
@@ -1247,28 +1478,32 @@ function buildXlsx(model, langs, cur) {
   a.push([{ v: lab('fDrawdown'), s: ST.text }, { v: inp.ddMonths !== undefined ? inp.ddMonths : inp.ddYears * 12, s: ST.int }]);
   a.push([{ v: lab('fRepay'), s: ST.text }, { v: inp.repMonths !== undefined ? inp.repMonths : inp.repYears * 12, s: ST.int }]);
   a.push([{ v: lab('fFreq'), s: ST.text }, { v: inp.freq, s: ST.int }]);
-  a.push([{ v: lab('fPremRate'), s: ST.text }, { v: +inp.premRate.toFixed(10), s: ST.pct }]);
+  a.push([{ v: lab('fPremRate'), s: ST.text }, { v: cover ? +inp.premRate.toFixed(10) : 0, s: ST.pct }]);
   a.push([{ v: lab('fPremBasis'), s: ST.text }, { v: txt(inp.premBasis === 'PI' ? 'shortPI' : 'shortP', loc), s: ST.text }]);
-  a.push([{ v: lab('fPremFin'), s: ST.text }, { v: model.premFinanceRatio, s: ST.pct4 }]);
-  a.push([{ v: lab('fIdc') + ' (' + cur + ')', s: ST.text }, { v: inp.finIDC || 0, s: ST.money }]);
+  a.push([{ v: lab('fPremFin'), s: ST.text }, { v: cover ? model.premFinanceRatio : 0, s: ST.pct4 }]);
+  a.push([{ v: lab('kIdc') + ' (' + cur + ')', s: ST.text }, { v: model.idc || 0, s: ST.money }]);
   a.push([{ v: lab('fCurrency'), s: ST.text }, { v: cur, s: ST.text }]);
-  a.push([{ v: lab('fRepayType'), s: ST.text }, { v: txt(inp.repayType === 'balloon' ? 'optBalloon' : 'optEqual', loc) + (inp.repayType === 'balloon' ? ' · ' + ((model.balloonShare || 0) * 100).toFixed(0) + '%' : ''), s: ST.text }]);
+  a.push([{ v: lab('fRepayType'), s: ST.text }, { v: txt(inp.repayType === 'balloon' ? 'optBalloon' : inp.repayType === 'annuity' ? 'optAnnuity' : 'optEqual', loc) + (inp.repayType === 'balloon' ? ' · ' + ((model.balloonShare || 0) * 100).toFixed(0) + '%' : ''), s: ST.text }]);
   a.push([{ v: lab('sheetDerived'), s: ST.section }]);
   /* rows 20..28 (1-based) */
   a.push([{ v: lab('derivedLoan'), s: ST.text }, { v: model.loan, s: ST.money, f: 'B4*B6' }]);              /* row 20 */
   a.push([{ v: lab('kPremium'), s: ST.text }, { v: model.premium, s: ST.money }]);                          /* row 21 */
   a.push([{ v: lab('kFacility'), s: ST.text }, { v: model.facility, s: ST.money, f: 'B20+B21*B15+B16' }]); /* 22 */
   a.push([{ v: lab('kInterest'), s: ST.text }, { v: model.interest, s: ST.money, f: 'Schedule!J{total}' }]); /* 23 */
-  a.push([{ v: lab('kPI'), s: ST.text }, { v: model.pi, s: ST.money, f: 'B22+B23' }]);                     /* 24 */
+  a.push([{ v: lab('kPI'), s: ST.text }, { v: model.pi, s: ST.money, f: 'B22+B23-B16' }]);                 /* 24 */
   a.push([{ v: lab('kInsured'), s: ST.text }, { v: model.insured, s: ST.money, f: 'B24' }]);               /* 25 */
   a.push([{ v: lab('kPRate'), s: ST.text }, { v: model.pRate, s: ST.pct4, f: 'B21/B22' }]);                 /* 26 */
   a.push([{ v: lab('kEquity3'), s: ST.text }, { v: model.equity3, s: ST.money, f: 'B25*3' }]);              /* 27 */
   a.push([{ v: lab('kWAL'), s: ST.text }, { v: model.wal, s: ST.num2, f: 'SUMPRODUCT(Schedule!$F$2:$F${last},(Schedule!$B$2:$B${last}-$B$5))/365.25/$B$22' }]); /* 28 */
+  a.push([{ v: lab('fIdc'), s: ST.text }, { v: txt(inp.idcCap ? 'idcCap' : 'idcPay', loc), s: ST.text }]);  /* 29 */
+  a.push([{ v: lab('fDrawFreq'), s: ST.text }, { v: (inp.drawStepMonths || 3) + ' ' + txt('unitMons', loc), s: ST.text }]); /* 30 */
   a.push([]);
   a.push([{ v: lab('secIRR'), s: ST.section }]);
   a.push([{ v: lab('kIRRAll'), s: ST.text }, { v: model.irrAllIn, s: ST.pct4 }]);
-  a.push([{ v: lab('kIRRExcl'), s: ST.text }, { v: model.irrExcl, s: ST.pct4 }]);
-  a.push([{ v: lab('kIRRUpBp') + ' (bp)', s: ST.text }, { v: model.bpUpfront, s: ST.num2 }]);
+  if (cover) {
+    a.push([{ v: lab('kIRRExcl'), s: ST.text }, { v: model.irrExcl, s: ST.pct4 }]);
+    a.push([{ v: lab('kIRRUpBp') + ' (bp)', s: ST.text }, { v: model.bpUpfront, s: ST.num2 }]);
+  }
   a.push([]);
   var noteRow1 = a.length + 1;
   a.push([{ v: txt('noteExcel', loc), s: ST.note }]);
@@ -1292,11 +1527,11 @@ function buildXlsx(model, langs, cur) {
       { v: r.opening, s: ST.money, f: (row === 2 ? null : 'G' + prev) },
       { v: r.drawdown, s: ST.money },
       { v: r.principal, s: ST.money },
-      { v: r.closing, s: ST.money, f: 'D' + row + '+E' + row + '-F' + row },
+      { v: r.closing, s: ST.money, f: r.capped ? null : 'D' + row + '+E' + row + '-F' + row },
       { v: r.baseInt, s: ST.money, f: '(D' + row + '+E' + row + ')*Assumptions!$B$7*C' + row + '/Assumptions!$B$9' },
       { v: r.marginInt, s: ST.money, f: '(D' + row + '+E' + row + ')*Assumptions!$B$8*C' + row + '/Assumptions!$B$9' },
       { v: r.interest, s: ST.money, f: 'H' + row + '+I' + row },
-      { v: r.total, s: ST.money, f: 'F' + row + '+J' + row }
+      { v: (r.capped || r.accrue) ? 0 : r.total, s: ST.money, f: (r.capped || r.accrue) ? null : 'F' + row + '+J' + row }
     ]);
   });
   s.push([
@@ -1317,11 +1552,13 @@ function buildXlsx(model, langs, cur) {
   var sum = [];
   sum.push([{ v: lab('secSummary'), s: ST.section }]);
   sum.push([{ v: lab('colLabel'), s: ST.head }, { v: lab('colValue'), s: ST.head }]);
+  var PREM_KEYS = { kPremium: 1, kInsured: 1, kPRate: 1, kIRRExcl: 1, kIRRUpBp: 1, kEquity3: 1, fCompRatio: 1 };
   [
     ['derivedLoan', model.loan, ST.money],
     ['kFacility', model.facility, ST.money],
     ['kPremium', model.premium, ST.money],
     ['kInsured', model.insured, ST.money],
+    ['fCompRatio', model.inp.compRatio, ST.pct4],
     ['kInterest', model.interest, ST.money],
     ['kPI', model.pi, ST.money],
     ['kPRate', model.pRate, ST.pct4],
@@ -1333,6 +1570,7 @@ function buildXlsx(model, langs, cur) {
     ['kInterestRatio', model.ratio, ST.pct],
     ['kWAL', model.wal, { s: ST.text }]
   ].forEach(function (m) {
+    if (!cover && PREM_KEYS[m[0]]) return;
     var v = (typeof m[2] === 'object') ? Object.assign({ v: m[1] }, m[2]) : { v: m[1], s: m[2] };
     sum.push([{ v: lab(m[0]) + (m[3] ? ' (' + m[3] + ')' : ''), s: ST.text }, v]);
   });
@@ -1408,7 +1646,7 @@ var Core = {
   LANGS: LANGS, DICT: DICT, txt: txt, DEFAULTS: DEFAULTS, BASE_CASE: BASE_CASE,
   compute: compute, computeAtRate: computeAtRate, buildSchedule: buildSchedule,
   validate: validate, buildXlsx: buildXlsx, eomAdd: eomAdd, isoOf: isoOf,
-  excelSerial: excelSerial, toDate: toDate
+  excelSerial: excelSerial, toDate: toDate, xirr: xirr
 };
 if (typeof module !== 'undefined' && module.exports) module.exports = Core;
 if (typeof window !== 'undefined') window.Core = Core;
@@ -1423,14 +1661,18 @@ if (typeof window !== 'undefined') window.Core = Core;
     var arr = raw.split('-');
     return arr.length ? arr : ['zh'];
   }
-  var state = { langs: initialLangs(), cur: 'USD', scale: 1, model: null, inputs: null, msgs: [] };
+  var state = { langs: initialLangs(), cur: 'USD', scale: 1, model: null, inputs: null, msgs: [], hedge: { spot: null, fwd: null } };
   var CUR = {
     USD: { sym: '$' }, EUR: { sym: '€' }, CNY: { sym: '¥' }, GBP: { sym: '£' }
   };
-  var LOC = { zh: 'zh-CN', en: 'en-US', fr: 'fr-FR' };
+  var LOC = { zh: 'zh-CN', en: 'en-US', fr: 'fr-FR', pt: 'pt-PT', es: 'es-ES', ru: 'ru-RU', ar: 'ar' };
   var SHORT_MON = {
     en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-    fr: ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.']
+    fr: ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'],
+    pt: ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'],
+    es: ['ene.', 'feb.', 'mar.', 'abr.', 'may.', 'jun.', 'jul.', 'ago.', 'sep.', 'oct.', 'nov.', 'dic.'],
+    ru: ['янв.', 'февр.', 'мар.', 'апр.', 'май', 'июн.', 'июл.', 'авг.', 'сент.', 'окт.', 'нояб.', 'дек.'],
+    ar: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر']
   };
 
   /* ------------------------ flags ------------------------ */
@@ -1446,14 +1688,26 @@ if (typeof window !== 'undefined') window.Core = Core;
   var FLAG = {
     zh: '<svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><rect width="60" height="30" fill="#de2910"/>' + starPoly(11, 15, 9, 3.8) + '</svg>',
     en: '<svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><rect width="60" height="30" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#ffffff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="3"/><path d="M30,0 V30 M0,15 H60" stroke="#ffffff" stroke-width="10"/><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="5"/></svg>',
-    fr: '<svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><rect width="20" height="30" fill="#0055A4"/><rect x="20" width="20" height="30" fill="#ffffff"/><rect x="40" width="20" height="30" fill="#EF4135"/></svg>'
+    fr: '<svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><rect width="20" height="30" fill="#0055A4"/><rect x="20" width="20" height="30" fill="#ffffff"/><rect x="40" width="20" height="30" fill="#EF4135"/></svg>',
+    pt: '<svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><rect width="60" height="30" fill="#046a38"/><polygon points="30,5 44,15 30,25 16,15" fill="#ffdf00"/><circle cx="30" cy="15" r="4" fill="#c60c30"/></svg>',
+    es: '<svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><rect width="60" height="10" fill="#aa151b"/><rect y="10" width="60" height="10" fill="#f1bf00"/><rect y="20" width="60" height="10" fill="#aa151b"/></svg>',
+    ru: '<svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><rect width="60" height="10" fill="#ffffff"/><rect y="10" width="60" height="10" fill="#0039a6"/><rect y="20" width="60" height="10" fill="#d52b1e"/></svg>',
+    ar: '<svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><rect width="60" height="10" fill="#000000"/><rect y="10" width="60" height="10" fill="#ffffff"/><rect y="20" width="60" height="10" fill="#007a3d"/><polygon points="0,0 18,15 0,30" fill="#ce1126"/></svg>'
   };
   var LANG_MODES = {
     zh: { langs: ['zh'], label: '中文', short: '中文' },
     en: { langs: ['en'], label: 'English', short: 'EN' },
     fr: { langs: ['fr'], label: 'Français', short: 'FR' },
+    pt: { langs: ['pt'], label: 'Português', short: 'PT' },
+    es: { langs: ['es'], label: 'Español', short: 'ES' },
+    ru: { langs: ['ru'], label: 'Русский', short: 'RU' },
+    ar: { langs: ['ar'], label: 'العربية', short: 'AR' },
     'zh-en': { langs: ['zh', 'en'], label: '中文 + English', short: '中 / EN' },
     'zh-fr': { langs: ['zh', 'fr'], label: '中文 + Français', short: '中 / FR' },
+    'zh-pt': { langs: ['zh', 'pt'], label: '中文 + Português', short: '中 / PT' },
+    'zh-es': { langs: ['zh', 'es'], label: '中文 + Español', short: '中 / ES' },
+    'zh-ru': { langs: ['zh', 'ru'], label: '中文 + Русский', short: '中 / RU' },
+    'zh-ar': { langs: ['zh', 'ar'], label: '中文 + العربية', short: '中 / AR' },
     'zh-en-fr': { langs: ['zh', 'en', 'fr'], label: '中文 + English + Français', short: '中 / EN / FR' }
   };
   function modeOf(langs) { return langs.join('-'); }
@@ -1470,6 +1724,130 @@ if (typeof window !== 'undefined') window.Core = Core;
       b.classList.toggle('on', b.getAttribute('data-mode') === mode);
     });
     document.documentElement.lang = state.langs[0] === 'zh' ? 'zh-CN' : state.langs[0];
+    document.documentElement.dir = state.langs[0] === 'ar' ? 'rtl' : 'ltr';
+  }
+
+  /* ---------- auto language by visitor IP ---------- */
+  var LANG_USER_KEY = 'langUser_v1';
+  var LANG_AUTO_KEY = 'langAuto_v1';
+  var LANG_AUTO_TTL = 12 * 3600 * 1000;
+  var langAuto = { busy: false, done: false, src: '', country: '', mode: '', userPicked: false };
+
+  function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) { } }
+
+  var CC_GROUPS = {
+    pt: ['PT', 'BR', 'AO', 'MZ', 'CV', 'GW', 'ST', 'TL'],
+    es: ['ES', 'MX', 'AR', 'CO', 'CL', 'PE', 'VE', 'EC', 'GT', 'CU', 'BO', 'DO', 'HN', 'PY', 'SV', 'NI', 'CR', 'PA', 'UY', 'PR', 'GQ'],
+    ru: ['RU', 'BY', 'KZ', 'KG', 'TJ', 'UZ', 'AM', 'AZ', 'TM'],
+    ar: ['SA', 'AE', 'EG', 'QA', 'KW', 'BH', 'OM', 'JO', 'LB', 'IQ', 'SY', 'YE', 'LY', 'TN', 'DZ', 'MA', 'SD', 'MR', 'PS', 'DJ', 'SO', 'KM'],
+    fr: ['FR', 'BE', 'LU', 'MC', 'CH', 'SN', 'CI', 'CM', 'ML', 'BF', 'NE', 'TG', 'BJ', 'GA', 'CG', 'CD', 'MG', 'HT'],
+    zh: ['CN']
+  };
+  function modeByCountry(cc) {
+    cc = String(cc || '').toUpperCase();
+    var keys = Object.keys(CC_GROUPS);
+    for (var i = 0; i < keys.length; i++) {
+      if (CC_GROUPS[keys[i]].indexOf(cc) >= 0) return keys[i];
+    }
+    return 'en';
+  }
+  function modeByLocale(tag) {
+    var p = String(tag || '').toLowerCase().split('-')[0];
+    var map = { zh: 'zh', en: 'en', fr: 'fr', pt: 'pt', es: 'es', ru: 'ru', ar: 'ar' };
+    return map[p] || 'en';
+  }
+  function applyLangMode(mode) {
+    if (!LANG_MODES[mode]) return false;
+    if (modeOf(state.langs) === mode) return false;
+    state.langs = LANG_MODES[mode].langs.slice();
+    applyI18n();
+    renderNotes();
+    render();
+    return true;
+  }
+  function autoLangNote() {
+    var box = $('#langAuto');
+    if (!box) return;
+    var span = box.querySelector('span');
+    var btn = box.querySelector('button');
+    box.hidden = false;
+    if (btn) btn.textContent = t1('autoLangRe');
+    if (langAuto.busy) { span.textContent = t1('autoLangBusy'); if (btn) btn.hidden = true; return; }
+    if (btn) btn.hidden = false;
+    var label = (LANG_MODES[langAuto.mode] || LANG_MODES.zh).label;
+    var sp = state.langs[0] === 'zh' ? '：' : ': ';
+    if (langAuto.src === 'manual') span.textContent = t1('autoLangManual') + sp + label;
+    else if (langAuto.src === 'ip') span.textContent = t1('autoLangDone') + sp + (langAuto.country || '') + ' · ' + label;
+    else if (langAuto.src === 'local') span.textContent = t1('autoLangLocal') + sp + label;
+    else span.textContent = t1('autoLangLocal');
+  }
+  function ipLookup() {
+    function getJson(url, ms) {
+      return new Promise(function (resolve, reject) {
+        var settled = false;
+        var timer = setTimeout(function () { if (!settled) { settled = true; reject(new Error('timeout')); } }, ms);
+        fetch(url, { cache: 'no-store' }).then(function (r) {
+          if (!r.ok) throw new Error('http ' + r.status);
+          return r.json();
+        }).then(function (j) {
+          if (settled) return; settled = true; clearTimeout(timer); resolve(j);
+        }).catch(function (e) {
+          if (settled) return; settled = true; clearTimeout(timer); reject(e);
+        });
+      });
+    }
+    return getJson('https://ipwho.is/', 3000).then(function (j) {
+      if (j && j.success !== false && j.country_code) return { cc: j.country_code, name: j.country || j.country_code };
+      throw new Error('bad payload');
+    }).catch(function () {
+      return getJson('https://ipapi.co/json/', 3000).then(function (j) {
+        if (j && j.country_code) return { cc: j.country_code, name: j.country_name || j.country_code };
+        throw new Error('bad payload');
+      });
+    });
+  }
+  function detectLang() {
+    langAuto.busy = true;
+    langAuto.done = false;
+    autoLangNote();
+    ipLookup().then(function (geo) {
+      langAuto.src = 'ip';
+      langAuto.country = geo.name;
+      langAuto.mode = modeByCountry(geo.cc);
+      if (!langAuto.userPicked) applyLangMode(langAuto.mode);
+      lsSet(LANG_AUTO_KEY, JSON.stringify({ t: Date.now(), cc: geo.cc, name: geo.name, mode: langAuto.mode }));
+    }).catch(function () {
+      langAuto.src = 'local';
+      langAuto.mode = modeByLocale(navigator.language || navigator.userLanguage);
+      if (!langAuto.userPicked) applyLangMode(langAuto.mode);
+    }).then(function () {
+      langAuto.busy = false;
+      langAuto.done = true;
+      if (langAuto.userPicked) { langAuto.src = 'manual'; langAuto.mode = modeOf(state.langs); }
+      autoLangNote();
+    });
+  }
+  function initLangAuto() {
+    var manual = lsGet(LANG_USER_KEY);
+    if (manual && LANG_MODES[manual]) {
+      state.langs = LANG_MODES[manual].langs.slice();
+      langAuto.src = 'manual';
+      langAuto.mode = manual;
+      langAuto.done = true;
+      return;
+    }
+    var cached = null;
+    try { cached = JSON.parse(lsGet(LANG_AUTO_KEY) || 'null'); } catch (e) { cached = null; }
+    if (cached && cached.mode && LANG_MODES[cached.mode] && (Date.now() - (cached.t || 0) < LANG_AUTO_TTL)) {
+      langAuto.src = 'ip';
+      langAuto.country = cached.name || cached.cc || '';
+      langAuto.mode = cached.mode;
+      langAuto.done = true;
+      state.langs = LANG_MODES[cached.mode].langs.slice();
+      return;
+    }
+    detectLang();
   }
 
   function $(s) { return document.querySelector(s); }
@@ -1524,7 +1902,9 @@ if (typeof window !== 'undefined') window.Core = Core;
     if (isNaN(d.getTime())) return '—';
     var lang = state.langs[0];
     if (lang === 'zh') return d.getUTCFullYear() + '年' + (d.getUTCMonth() + 1) + '月' + d.getUTCDate() + '日';
-    var m = (lang === 'fr' ? SHORT_MON.fr : SHORT_MON.en)[d.getUTCMonth()];
+    var mon = SHORT_MON[lang] || SHORT_MON.en;
+    var m = mon[d.getUTCMonth()];
+    if (lang === 'ar') return d.getUTCDate() + ' ' + m + ' ' + d.getUTCFullYear();
     return d.getUTCDate() + ' ' + m + ' ' + d.getUTCFullYear();
   }
   function shortDate(iso) {
@@ -1564,7 +1944,6 @@ if (typeof window !== 'undefined') window.Core = Core;
       else el.innerHTML = lbl(key);
     });
     $('#sfxCur').textContent = state.cur;
-    $('#sfxCur2').textContent = state.cur;
     var bl = document.querySelector('label[for="inBase"]');
     if (bl) { bl.removeAttribute('data-i18n'); bl.innerHTML = lbl(bench().labelKey); }
     var pi = $('#inPremBasis');
@@ -1575,21 +1954,39 @@ if (typeof window !== 'undefined') window.Core = Core;
     var rt = $('#inRepType');
     if (rt) {
       rt.options[0].textContent = t1('optEqual');
-      rt.options[1].textContent = t1('optBalloon');
+      rt.options[1].textContent = t1('optAnnuity');
+      rt.options[2].textContent = t1('optBalloon');
     }
+    var cv = $('#inCover');
+    if (cv) {
+      cv.options[0].textContent = t1('optCoverOn');
+      cv.options[1].textContent = t1('optCoverOff');
+    }
+    var ic = $('#inIDC');
+    if (ic) {
+      ic.options[0].textContent = t1('idcPay');
+      ic.options[1].textContent = t1('idcCap');
+    }
+
     renderLangUI();
     renderBench();
     renderLive();
   }
   function renderNotes() {
-    $('#notesList').innerHTML = ['note1', 'note2', 'note3', 'note4', 'note6', 'note5'].map(function (k) {
+    var keys = ['note1', 'note2', 'note3', 'note4', 'note6', 'note5'];
+    var ddNow = $('#inDD') ? parseNum($('#inDD').value) : 0;
+    var stNow = $('#inDrawFreq') ? parseNum($('#inDrawFreq').value) : 3;
+    var pMonth = $('#inFreq') ? 12 / (parseInt($('#inFreq').value, 10) || 2) : 6;
+    if (ddNow > 0 && stNow > 0 && stNow < pMonth - 1e-9) keys.push('notePay');
+    if ($('#inIDC') && $('#inIDC').value === 'cap') keys.splice(1, 0, 'noteIdc');
+    $('#notesList').innerHTML = keys.map(function (k) {
       return '<li>' + lbl(k) + '</li>';
     }).join('');
   }
 
   /* ------------------------ inputs ------------------------ */
   function v(sel) { return parseNum($(sel).value); }
-  var IN_DEC = { inPrice: 0, inEquity: 2, inDebt: 2, inBase: 4, inMargin: 4, inDD: 2, inRep: 0, inPrem: 4, inIDC: 0 };
+  var IN_DEC = { inPrice: 0, inEquity: 2, inDebt: 2, inBase: 4, inMargin: 4, inDD: 2, inRep: 0, inPrem: 4 };
   function formatField(el) {
     var dec = IN_DEC[el.id];
     if (dec === undefined) return;
@@ -1602,18 +1999,21 @@ if (typeof window !== 'undefined') window.Core = Core;
       debtShare: v('#inDebt') / 100,
       baseRate: v('#inBase') / 100,
       margin: v('#inMargin') / 100,
-      basis: parseInt($('#inBasis').value, 10),
+      basis: parseInt($('#inBasis').value, 10) || 360,
       ddMonths: Math.max(0, v('#inDD')),
       repMonths: Math.max(0, v('#inRep')),
       ddYears: Math.max(0, v('#inDD')) / 12,
       repYears: Math.max(0, v('#inRep')) / 12,
-      freq: parseInt($('#inFreq').value, 10),
+      freq: parseInt($('#inFreq').value, 10) || 2,
       repayType: $('#inRepType').value,
       balloonShare: Math.max(0, Math.min(100, v('#inBalloon') || 0)) / 100,
+      insured: $('#inCover').value !== 'off',
       premRate: v('#inPrem') / 100,
       premBasis: $('#inPremBasis').value,
       premFinanceRatio: Math.max(0, Math.min(85, v('#inPremFin') || 0)) / 100,
-      finIDC: v('#inIDC'),
+      compRatio: Math.max(0, Math.min(100, v('#inComp') || 0)) / 100,
+      drawStepMonths: Math.max(1, Math.min(6, Math.round(v('#inDrawFreq')) || 3)),
+      idcCap: $('#inIDC').value === 'cap',
       currency: state.cur
     };
   }
@@ -1636,15 +2036,20 @@ if (typeof window !== 'undefined') window.Core = Core;
     var bs = inp.balloonShare === undefined ? 100 : inp.balloonShare * 100;
     $('#inBalloon').value = fmtInput(bs, 2);
     $('#fieldBalloon').hidden = (inp.repayType !== 'balloon');
+    $('#inCover').value = inp.insured === false ? 'off' : 'on';
     $('#inPrem').value = fmtInput(inp.premRate * 100, 4);
     $('#inPremBasis').value = inp.premBasis;
-    $('#inIDC').value = fmtInput(inp.finIDC, 0);
+    $('#inDrawFreq').value = fmtInput(inp.drawStepMonths || 3, 0);
+    $('#inIDC').value = inp.idcCap ? 'cap' : 'pay';
     var pr = inp.premFinanceRatio === undefined ? (inp.premFinanced ? 85 : 0) : inp.premFinanceRatio * 100;
     $('#inPremFin').value = fmtInput(Math.min(85, Math.max(0, pr)), 2);
+    var cr = inp.compRatio === undefined ? 95 : inp.compRatio * 100;
+    $('#inComp').value = fmtInput(Math.min(100, Math.max(0, cr)), 2);
   }
   function updatePeriodHints(ddM, repM) {
     var lang = state.langs[0];
-    var yUnit = lang === 'zh' ? ' 年' : lang === 'fr' ? ' ans' : ' yrs';
+    var YUNIT = { zh: ' 年', en: ' yrs', fr: ' ans', pt: ' anos', es: ' años', ru: ' лет', ar: ' سنة' };
+    var yUnit = YUNIT[lang] || ' yrs';
     function fmt(m) {
       var y = m / 12;
       if (!isFinite(y)) return '';
@@ -1677,6 +2082,14 @@ if (typeof window !== 'undefined') window.Core = Core;
     $('#dLoan').textContent = money(m.loan, 2);
     $('#dFac').textContent = money(m.facility, 2);
     $('#dFinPrem').textContent = money(m.financedPremium, 2);
+    $('#dIdc').textContent = money(m.idc || 0, 2);
+    $('#rowIdc').hidden = !(m.idc > 0);
+  }
+
+  function applyCoverVisibility(m) {
+    var cover = m.covered !== false;
+    ['#fieldPrem', '#fieldPremBasis', '#fieldPremFin', '#fieldComp', '#kpiPrem', '#kpiIns', '#kpiPRate', '#kpiEq', '#rowFinPrem', '#irrExclCell', '#bpUpCell']
+      .forEach(function (sel) { var el = $(sel); if (el) el.hidden = !cover; });
   }
 
   function kpiValue(id, val) { $(id).innerHTML = compact(val); }
@@ -1684,24 +2097,28 @@ if (typeof window !== 'undefined') window.Core = Core;
   function renderKPIs(m) {
     var lang = state.langs[0];
     kpiValue('#kFac', m.facility);
-    $('#kFacS').textContent = t1('derivedLoan', lang) + ' ' + money(m.loan, 0) + ' · ' + t1('kMonths', lang) + ' ' + m.tenorMonths;
+    $('#kFacS').textContent = t1('derivedLoan', lang) + ' ' + money(m.loan, 0) +
+      (m.idc > 0 ? ' · ' + t1('kIdc', lang) + ' ' + money(m.idc, 0) : '') +
+      ' · ' + t1('kMonths', lang) + ' ' + m.tenorMonths;
 
     kpiValue('#kPrem', m.premium);
     $('#kPremS').textContent = t1(m.inp.premBasis === 'PI' ? 'shortPI' : 'shortP', lang) + ' · ' + pct(m.inp.premRate, 2);
 
     kpiValue('#kIns', m.insured);
-    $('#kInsS').textContent = '3x ' + compact(m.equity3).replace(/<[^>]+>/g, '');
+    $('#kInsS').textContent = t1(m.inp.premBasis === 'PI' ? 'shortPI' : 'shortP', lang) + ' · ' + state.cur;
 
     $('#kPRate').innerHTML = pct(m.pRate, 4).replace(/%$/, '<span class="unit">%</span>');
     $('#kPRateS').textContent = t1('kPremium', lang) + ' / ' + t1('derivedFacility', lang);
 
     kpiValue('#kInt', m.interest);
-    $('#kIntS').textContent = pct(m.ratio, 2) + ' · ' + pct(m.allIn, 2);
+    $('#kIntS').textContent = t1('kInterestRatio', lang) + ' ' + pct(m.ratio, 2) + ' · ' + t1('kAllInShort', lang) + ' ' + pct(m.allIn, 2);
 
     kpiValue('#kPI', m.pi);
-    $('#kPIS').textContent = fmtDate(m.firstDate) + ' → ' + fmtDate(m.lastDate);
+    $('#kPIS').textContent = fmtDate(m.firstDate) + ' → ' + fmtDate(m.lastDate) +
+      (m.idc > 0 ? ' · ' + t1('kPIcapSub', lang) : '');
 
-    $('#kWAL').innerHTML = num(m.wal, 2) + '<span class="unit">' + (lang === 'zh' ? '年' : lang === 'fr' ? 'ans' : 'yrs') + '</span>';
+    var YUNIT2 = { zh: '年', en: 'yrs', fr: 'ans', pt: 'anos', es: 'años', ru: 'лет', ar: 'سنة' };
+    $('#kWAL').innerHTML = num(m.wal, 2) + '<span class="unit">' + (YUNIT2[lang] || 'yrs') + '</span>';
     $('#kWALS').textContent = t1('kMonths', lang) + ' ' + m.tenorMonths;
 
     kpiValue('#kEq', m.equity3);
@@ -1812,13 +2229,27 @@ if (typeof window !== 'undefined') window.Core = Core;
 
     var scale = state.scale;
     function mv(x) { return num(x / scale, 2); }
+    function detailHtml(r) {
+      var rows = r.detail.map(function (d) {
+        return '<tr><td class="l">' + fmtDate(d.date) + '</td><td>' + (d.drawdown ? mv(d.drawdown) : '—') + '</td><td>' + d.days + '</td><td>' + mv(d.interest) + '</td></tr>';
+      }).join('');
+      return '<tr class="detail-row" hidden><td colspan="11"><table class="dt"><thead><tr>' +
+        '<th class="l">' + lbl('thDate') + '</th><th>' + lbl('thDrawdown') + '</th><th>' + lbl('thDays') + '</th><th>' + lbl('thInterest') + '</th>' +
+        '</tr></thead><tbody>' + rows + '</tbody></table></td></tr>';
+    }
     var html = '';
     m.rows.forEach(function (r) {
       var cls = [];
       if (m.nGrace > 0 && r.period <= m.nGrace) cls.push('grace');
       if (r.period === m.rows.length) cls.push('final');
+      var hasDetail = !!(r.detail && r.detail.length);
+      if (hasDetail) cls.push('has-detail');
       html += '<tr' + (cls.length ? ' class="' + cls.join(' ') + '"' : '') + '>' +
-        '<td class="l">' + r.period + (m.nGrace > 0 && r.period <= m.nGrace ? '<span class="grace-tag">' + esc(t1('tagDrawdown')) + '</span>' : '') + '</td>' +
+        '<td class="l">' + (hasDetail ? '<span class="exp">▸</span>' : '') + r.period +
+          (m.nGrace > 0 && r.period <= m.nGrace ? '<span class="grace-tag">' + esc(t1('tagDrawdown')) + '</span>' : '') +
+          (r.capped ? '<span class="cap-tag">' + esc(t1('tagCap')) + '</span>' : '') +
+          (r.accrue ? '<span class="acc-tag">' + esc(t1('tagAcc')) + '</span>' : '') +
+          (r.settle > 0 && !r.capped ? '<span class="pay-tag">' + esc(t1('tagSettle')) + '</span>' : '') + '</td>' +
         '<td class="l">' + fmtDate(r.end) + '</td>' +
         '<td>' + r.days + '</td>' +
         '<td>' + mv(r.opening) + '</td>' +
@@ -1830,6 +2261,7 @@ if (typeof window !== 'undefined') window.Core = Core;
         '<td>' + mv(r.interest) + '</td>' +
         '<td><b>' + mv(r.total) + '</b></td>' +
         '</tr>';
+      if (hasDetail) html += detailHtml(r);
     });
     html += '<tr class="total">' +
       '<td class="l" colspan="4">' + esc(t1('totalRow')) + '</td>' +
@@ -1842,6 +2274,16 @@ if (typeof window !== 'undefined') window.Core = Core;
       '<td>' + mv(m.totals.total) + '</td>' +
       '</tr>';
     $('#gridBody').innerHTML = html;
+    $('#gridBody').onclick = function (e) {
+      var tr = e.target.closest('tr.has-detail');
+      if (!tr) return;
+      var next = tr.nextElementSibling;
+      if (next && next.classList.contains('detail-row')) {
+        next.hidden = !next.hidden;
+        var exp = tr.querySelector('.exp');
+        if (exp) exp.classList.toggle('open', !next.hidden);
+      }
+    };
     $('#tblMeta').textContent = t1('kPeriods') + ' ' + m.periods + ' · ' +
       (state.scale === 1 ? state.cur : state.cur + ' ×' + num(state.scale, 0));
   }
@@ -1977,7 +2419,6 @@ if (typeof window !== 'undefined') window.Core = Core;
       if (ro && rn) {
         var f = rn / ro;
         $('#inPrice').value = fmtInput(parseNum($('#inPrice').value) * f, 0);
-        $('#inIDC').value = fmtInput(parseNum($('#inIDC').value) * f, 0);
       }
     }
     var b = bench();
@@ -2047,6 +2488,64 @@ if (typeof window !== 'undefined') window.Core = Core;
 
   }
 
+  /* ------------------------ CNY forward hedge ------------------------ */
+  var HEDGE_KEY = 'hedgeQuote_v1';
+  function hedgeTenor(months) {
+    if (!isFinite(months) || months <= 0) months = 3;
+    var days = Math.round(months * 30);
+    if (months <= 0.34) return { days: days, label: t1('tenorWeek'), capped: false };
+    if (months > 12) return { days: days, label: t1('tenorYear'), capped: true };
+    var mm = Math.round(months); if (mm < 1) mm = 1;
+    return { days: days, label: mm + ' ' + t1('tenorMonth'), capped: false };
+  }
+  function loadHedge() {
+    try { var s = localStorage.getItem(HEDGE_KEY); return s ? JSON.parse(s) : null; } catch (e) { return null; }
+  }
+  function persistHedge() {
+    try { localStorage.setItem(HEDGE_KEY, JSON.stringify(state.hedge)); } catch (e) { }
+  }
+  function parseHedgeInput(raw) {
+    var v = parseNum(raw);
+    if (!isFinite(v) || v <= 0) return null;
+    return v > 20 ? v / 100 : v;
+  }
+  function readHedgeInputs() {
+    state.hedge.spot = parseHedgeInput($('#hedgeSpot').value);
+    state.hedge.fwd = parseHedgeInput($('#hedgeFwd').value);
+    persistHedge();
+  }
+  function renderHedge(m) {
+    var block = $('#hedgeBlock');
+    var cell = $('#irrHedgeCell');
+    var cny = state.cur === 'CNY';
+    block.hidden = !cny;
+    cell.hidden = !cny;
+    if (!cny) return;
+    var ddM = m.inp.ddMonths !== undefined ? m.inp.ddMonths : m.inp.ddYears * 12;
+    var repM = m.inp.repMonths !== undefined ? m.inp.repMonths : m.inp.repYears * 12;
+    var t = hedgeTenor(ddM + repM);
+    $('#hedgeTenor').textContent = t1('fxHedgeTenor') + ': ' + t.label + ' (' + t.days + ')';
+    var spot = state.hedge.spot, fwd = state.hedge.fwd;
+    var costCNY = 0, usdAmt = 0, ratio = 0, hedgeIRR = NaN, ready = false;
+    if (isFinite(spot) && spot > 0 && isFinite(fwd) && fwd > 0) {
+      usdAmt = m.facility / spot;
+      costCNY = Math.max(0, spot - fwd) * usdAmt;
+      ratio = m.facility > 0 ? costCNY / m.facility : 0;
+      ready = true;
+      var flows = m.flows.map(function (f) { return { date: f.date, amount: f.amount }; });
+      flows.unshift({ date: m.inp.start, amount: -costCNY });
+      hedgeIRR = C.xirr(flows);
+    }
+    $('#hedgeCost').textContent = ready ? money(costCNY, 2) : '—';
+    $('#hedgeCostUSD').textContent = ready ? '$' + num(costCNY / spot, 2) : '—';
+    $('#hedgeRatio').textContent = ready ? pct(ratio, 2) : '—';
+    $('#irrHedge').textContent = (ready && isFinite(hedgeIRR)) ? pct(hedgeIRR, 2) : '—';
+    var msg = $('#hedgeMsg');
+    if (!ready) { msg.textContent = t1('fxHedgeMsgFill'); msg.style.color = '#7a7a7a'; }
+    else if (fwd > spot) { msg.textContent = t1('fxHedgeMsgPrem'); msg.style.color = '#2e7d32'; }
+    else { msg.textContent = t1('fxHedgeMsgDone') + (t.capped ? ' · ' + t1('fxHedgeCap') : ''); msg.style.color = '#2e7d32'; }
+  }
+
   /* ------------------------ sensitivity ------------------------ */
   function renderSens(m) {
     var offs = [-0.02, -0.01, 0, 0.01, 0.02];
@@ -2089,15 +2588,20 @@ if (typeof window !== 'undefined') window.Core = Core;
     var m;
     try { m = C.compute(inp); } catch (e) { showAlert(['vDate']); return; }
     state.model = m;
+    applyCoverVisibility(m);
     renderDerived(m);
     renderKPIs(m);
     renderChart(m);
     renderTable(m);
     renderSens(m);
     renderIRR(m);
+    renderHedge(m);
     renderFx();
+    renderNotes();
     applyParity(m);
-    updatePeriodHints(m.inp.ddMonths !== undefined ? m.inp.ddMonths : m.inp.ddYears * 12, m.inp.repMonths !== undefined ? m.inp.repMonths : m.inp.repYears * 12);
+    var ddNow = m.inp.ddMonths !== undefined ? m.inp.ddMonths : m.inp.ddYears * 12;
+    updatePeriodHints(ddNow, m.inp.repMonths !== undefined ? m.inp.repMonths : m.inp.repYears * 12);
+    if ($('#hDrawFreq')) $('#hDrawFreq').textContent = t1(ddNow > 0 ? 'dDrawFreq' : 'dDrawFreqZero', state.langs[0]);
   }
 
   /* ------------------------ export ------------------------ */
@@ -2107,7 +2611,7 @@ if (typeof window !== 'undefined') window.Core = Core;
     var bytes = C.buildXlsx(state.model, state.langs, state.cur);
     var blob = new Blob([bytes], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
     var d = new Date();
-    var name = 'Sinosure_PI_estimation_' + d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + '.xlsx';
+    var name = 'ECA_PI_estimation_' + d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + '.xlsx';
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
     a.href = url; a.download = name;
@@ -2119,6 +2623,11 @@ if (typeof window !== 'undefined') window.Core = Core;
   /* ------------------------ events ------------------------ */
   function init() {
     writeInputs(C.DEFAULTS);
+    var savedHedge = loadHedge();
+    if (savedHedge) state.hedge = { spot: savedHedge.spot || null, fwd: savedHedge.fwd || null };
+    if (state.hedge.spot != null) $('#hedgeSpot').value = fmtInput(state.hedge.spot, 4);
+    if (state.hedge.fwd != null) $('#hedgeFwd').value = fmtInput(state.hedge.fwd, 4);
+    initLangAuto();
     applyI18n();
     renderNotes();
 
@@ -2127,7 +2636,16 @@ if (typeof window !== 'undefined') window.Core = Core;
       var m = LANG_MODES[k];
       return '<button type="button" data-mode="' + k + '">' + flagsOf(m.langs) +
         '<span class="lname">' + m.label + '</span></button>';
-    }).join('');
+    }).join('') + '<div class="langauto" id="langAuto" hidden><span></span><button type="button" id="langAutoRe"></button></div>';
+
+    autoLangNote();
+    var reBtn = $('#langAutoRe');
+    if (reBtn) reBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      langAuto.userPicked = false;
+      lsSet(LANG_USER_KEY, '');
+      detectLang();
+    });
 
     function setMenu(open) {
       var menu = $('#langMenu');
@@ -2143,8 +2661,15 @@ if (typeof window !== 'undefined') window.Core = Core;
       if (!b) return;
       var mode = b.getAttribute('data-mode');
       state.langs = (LANG_MODES[mode] || LANG_MODES.zh).langs.slice();
+      lsSet(LANG_USER_KEY, mode);
+      langAuto.userPicked = true;
+      langAuto.src = 'manual';
+      langAuto.mode = mode;
+      langAuto.busy = false;
+      langAuto.done = true;
       setMenu(false);
       applyI18n();
+      autoLangNote();
       renderNotes();
       render();
     });
@@ -2174,7 +2699,7 @@ if (typeof window !== 'undefined') window.Core = Core;
     });
 
     /* thousand separators on blur */
-    ['#inPrice', '#inBase', '#inMargin', '#inDD', '#inRep', '#inPrem', '#inIDC']
+    ['#inPrice', '#inBase', '#inMargin', '#inDD', '#inDrawFreq', '#inRep', '#inPrem']
       .forEach(function (sel) { $(sel).addEventListener('blur', function () { formatField(this); }); });
 
     renderLangUI();
@@ -2210,7 +2735,6 @@ if (typeof window !== 'undefined') window.Core = Core;
       if (state.cur === c && isFinite(old) && old > 0 && isFinite(FX.rates[c])) {
         var f = FX.rates[c] / old;
         $('#inPrice').value = fmtInput(parseNum($('#inPrice').value) * f, 0);
-        $('#inIDC').value = fmtInput(parseNum($('#inIDC').value) * f, 0);
       }
       renderFx();
       render();
@@ -2226,7 +2750,6 @@ if (typeof window !== 'undefined') window.Core = Core;
         if (state.cur !== 'USD' && isFinite(old) && old > 0 && isFinite(FX.rates[state.cur])) {
           var f = FX.rates[state.cur] / old;
           $('#inPrice').value = fmtInput(parseNum($('#inPrice').value) * f, 0);
-          $('#inIDC').value = fmtInput(parseNum($('#inIDC').value) * f, 0);
         }
         renderFx(); render(); fetchFx(); return;
       }
@@ -2244,6 +2767,11 @@ if (typeof window !== 'undefined') window.Core = Core;
       if (state.model) renderTable(state.model);
     });
 
+    $('#inDrawFreq').addEventListener('blur', function () {
+      var val = Math.max(1, Math.min(6, Math.round(parseNum(this.value)) || 3));
+      this.value = fmtInput(val, 0);
+      scheduleRender();
+    });
     $('#inPremFin').addEventListener('input', scheduleRender);
     $('#inPremFin').addEventListener('blur', function () {
       var val = parseNum(this.value);
@@ -2254,10 +2782,18 @@ if (typeof window !== 'undefined') window.Core = Core;
       render();
     });
 
-    ['#inPrice', '#inStart', '#inBase', '#inMargin', '#inDD', '#inRep', '#inPrem', '#inPremFin', '#inBalloon', '#inIDC']
+    ['#inPrice', '#inStart', '#inBase', '#inMargin', '#inDD', '#inDrawFreq', '#inRep', '#inPrem', '#inPremFin', '#inComp', '#inBalloon']
       .forEach(function (s) { $(s).addEventListener('input', scheduleRender); });
-    ['#inBasis', '#inFreq', '#inPremBasis'].forEach(function (s) {
+    ['#inBasis', '#inFreq', '#inPremBasis', '#inCover', '#inIDC'].forEach(function (s) {
       $(s).addEventListener('change', scheduleRender);
+    });
+    ['#hedgeSpot', '#hedgeFwd'].forEach(function (s) {
+      $(s).addEventListener('input', function () { readHedgeInputs(); scheduleRender(); });
+      $(s).addEventListener('blur', function () {
+        var v = parseNum(this.value);
+        if (isFinite(v) && v > 0) this.value = fmtInput(v > 20 ? v / 100 : v, 4);
+        readHedgeInputs(); render();
+      });
     });
     $('#inRepType').addEventListener('change', function () {
       $('#fieldBalloon').hidden = (this.value !== 'balloon');
