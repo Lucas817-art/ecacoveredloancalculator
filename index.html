@@ -603,7 +603,7 @@ var DICT = {
   fBase: ['基准利率（SOFR）', 'Base rate (SOFR)', 'Taux de référence (SOFR)'],
   fBaseSOFR: ['基准利率（SOFR）', 'Base rate (SOFR)', 'Taux de référence (SOFR)'],
   fBaseLPR: ['基准利率（LPR 5年）', 'Base rate (LPR 5Y)', 'Taux de référence (LPR 5 ans)'],
-  fBaseESTR: ['基准利率（€STR）', 'Base rate (€STR)', 'Taux de référence (€STR)'],
+  fBaseESTR: ['基准利率（3M EURIBOR）', 'Base rate (3M EURIBOR)', 'Taux de référence (EURIBOR 3 mois)'],
   fBaseSONIA: ['基准利率（SONIA）', 'Base rate (SONIA)', 'Taux de référence (SONIA)'],
   fMargin: ['利差', 'Margin', 'Marge'],
   fBasis: ['计息基数', 'Interest basis', 'Base de calcul'],
@@ -1852,8 +1852,8 @@ if (typeof window !== 'undefined') window.Core = Core;
       url: 'https://www.newyorkfed.org/markets/reference-rates/sofr', date: '2026-11-19', value: 3.91 },
     CNY: { name: 'LPR 5Y', labelKey: 'fBaseLPR', src: 'ChinaMoney', srcZh: '中国货币网', api: 'lpr',
       url: 'https://www.chinamoney.com.cn/chinese/bklpr/', date: '2026-11-20', value: 3.50 },
-    EUR: { name: '\u20acSTR', labelKey: 'fBaseESTR', src: 'ECB', srcZh: '欧洲央行', api: null,
-      url: 'https://www.ecb.europa.eu/stats/financial_markets_and_interest_rates/euro_short-term_rate/html/index.en.html', date: '2026-11-19', value: 2.441 },
+    EUR: { name: '3M EURIBOR', labelKey: 'fBaseESTR', src: 'EMMI / Bank of Finland', srcZh: 'EMMI / 芬兰央行', api: null,
+      url: 'https://www.emmi-benchmarks.eu/benchmarks/euribor/', date: '2026-11-18', value: 2.825 },
     GBP: { name: 'SONIA', labelKey: 'fBaseSONIA', src: 'BoE', srcZh: '英格兰银行', api: null,
       url: 'https://www.bankofengland.co.uk/boeapps/database/FromShowColumns.asp?Travel=NIxIRxSUx&FromSeries=1&ToSeries=50&DAT=RNG&FD=1&FM=Jan&FY=2026&TD=21&TM=Nov&TY=2026&FNC=CSV&CSVF=TN&UsingCodes=Y&Filter=N&title=SONIA&VPD=Y', date: '2026-11-18', value: 3.984 }
   };
@@ -2292,5 +2292,6 @@ if (typeof window !== 'undefined') window.Core = Core;
 })();
 
 </script>
+
 </body>
 </html>
